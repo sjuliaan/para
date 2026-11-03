@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parasitology Reviewer - Modules 11 & 12</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ust: {
+                            gold: '#F5B014',
+                            goldDark: '#D49405',
+                            black: '#1A1A1A',
+                            navy: '#0F172A',
+                            slate: '#1E293B',
+                            accent: '#0284C7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tab-btn.active {
+            border-bottom-color: #F5B014;
+            color: #F5B014;
+            background-color: rgba(245, 176, 20, 0.08);
+        }
+        .slide-card {
+            perspective: 1000px;
+        }
+        .slide-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .slide-card.flipped .slide-card-inner {
+            transform: rotateY(180deg);
+        }
+        .slide-card-front, .slide-card-back {
+            backface-visibility: hidden;
+        }
+        .slide-card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-ust-navy text-white shadow-xl sticky top-0 z-50 border-b-4 border-ust-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-3 mb-2 md:mb-0">
+                    <div class="w-10 h-10 bg-ust-gold rounded-lg flex items-center justify-center text-ust-black font-extrabold text-xl shadow-md border-2 border-white">
+                        <i class="fa-solid font-bold fa-bug"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-heading text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                            PARASITOLOGY BOARD REVIEWER
+                            <span class="text-xs font-semibold bg-ust-gold text-ust-black px-2 py-0.5 rounded-full uppercase">Med Review</span>
+                        </h1>
+                        <p class="text-xs text-slate-300">Modules 11 & 12 • Hemoflagellates & Malaria Parasites</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto custom-scrollbar pb-1 md:pb-0" id="main-nav">
+                    <button type="button" onclick="switchTab('notes')" id="tab-notes" class="tab-btn active flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-t-lg text-sm font-medium transition border-b-2 border-transparent hover:text-ust-gold whitespace-nowrap cursor-pointer">
+                        <i class="fa-solid fa-book-medical"></i>
+                        <span>High-Yield Info</span>
+                    </button>
+                    <button type="button" onclick="switchTab('lifecycles')" id="tab-lifecycles" class="tab-btn flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-t-lg text-sm font-medium transition border-b-2 border-transparent hover:text-ust-gold whitespace-nowrap cursor-pointer">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span>Life Cycles</span>
+                    </button>
+                    <button type="button" onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-t-lg text-sm font-medium transition border-b-2 border-transparent hover:text-ust-gold whitespace-nowrap cursor-pointer">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                        <span>Board Exams Quiz</span>
+                    </button>
+                    <button type="button" onclick="switchTab('practical')" id="tab-practical" class="tab-btn flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-t-lg text-sm font-medium transition border-b-2 border-transparent hover:text-ust-gold whitespace-nowrap cursor-pointer">
+                        <i class="fa-solid fa-microscope"></i>
+                        <span>Practical Exam</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: PARASITE INFO & HIGH-YIELD TABLES   -->
+        <!-- ========================================== -->
+        <section id="sec-notes" class="space-y-6">
+            <!-- Filter Banner -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-blue-50 text-ust-accent rounded-lg">
+                        <i class="fa-solid fa-filter text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-slate-800 text-sm">Select Review Module</h2>
+                        <p class="text-xs text-slate-500">Filter notes, clinical signs, & diagnostic high-yields</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 w-full md:w-auto">
+                    <button type="button" onclick="filterNotes('all')" id="filter-all" class="note-filter-btn px-4 py-2 rounded-lg text-xs font-bold transition bg-ust-navy text-white cursor-pointer">All Modules</button>
+                    <button type="button" onclick="filterNotes('mod11')" id="filter-mod11" class="note-filter-btn px-4 py-2 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer">Module 11 (Hemoflagellates)</button>
+                    <button type="button" onclick="filterNotes('mod12')" id="filter-mod12" class="note-filter-btn px-4 py-2 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer">Module 12 (Plasmodia)</button>
+                </div>
+            </div>
+
+            <!-- Module 11 Section -->
+            <div id="notes-mod11" class="space-y-6">
+                <!-- Module Header -->
+                <div class="border-l-4 border-ust-gold bg-amber-50/50 p-4 rounded-r-xl">
+                    <h2 class="text-xl font-heading font-bold text-ust-navy flex items-center gap-2">
+                        <i class="fa-solid fa-disease text-ust-gold"></i>
+                        Module 11: Leishmania & Trypanosoma (Hemoflagellates)
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">Transmitted by blood-sucking insect vectors. Includes 4 main morphological stages: Amastigote, Promastigote, Epimastigote, Trypomastigote.</p>
+                </div>
+
+                <!-- Morphological Summary Table -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-800 text-white px-4 py-3 font-bold text-sm flex items-center justify-between">
+                        <span><i class="fa-solid fa-table me-2 text-ust-gold"></i> Hemoflagellate Morphological Stages Quick Matrix</span>
+                        <span class="text-xs font-normal text-slate-300">Intracellular vs Extracellular</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left text-slate-700">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-bold border-b">
+                                <tr>
+                                    <th class="p-3">Stage</th>
+                                    <th class="p-3">Location in Host</th>
+                                    <th class="p-3">Key Features</th>
+                                    <th class="p-3">Parasite Presence</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-amber-700">Amastigote</td>
+                                    <td class="p-3">Intracellular (Macrophages, RES, Muscle, CNS)</td>
+                                    <td class="p-3">Small (3-5 µm), ovoid, non-motile, large nucleus, kinetoplast with axoneme.</td>
+                                    <td class="p-3 font-semibold text-slate-900">Leishmania spp., Trypanosoma cruzi</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-blue-700">Promastigote</td>
+                                    <td class="p-3">Arthropod vector (Sandfly) / NNN Culture</td>
+                                    <td class="p-3">Elongated, extracellular, single anterior free flagellum (15-28 µm). Motile.</td>
+                                    <td class="p-3 font-semibold text-slate-900">Leishmania spp. (Infective stage)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-emerald-700">Epimastigote</td>
+                                    <td class="p-3">Arthropod vector midgut/salivary glands</td>
+                                    <td class="p-3">Kinetoplast anterior to nucleus, short undulating membrane.</td>
+                                    <td class="p-3 font-semibold text-slate-900">T. cruzi, T. brucei complex</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-purple-700">Trypomastigote</td>
+                                    <td class="p-3">Peripheral Blood Circulation (Extracellular)</td>
+                                    <td class="p-3">C/U/S shape, posterior kinetoplast, full undulating membrane with free flagellum.</td>
+                                    <td class="p-3 font-semibold text-slate-900">T. cruzi, T. brucei complex</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- High-Yield Disease Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Leishmania Spp. -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <h3 class="font-bold text-lg text-ust-navy flex items-center gap-2">
+                                <i class="fa-solid fa-bacteria text-amber-500"></i> Leishmania Species
+                            </h3>
+                            <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2.5 py-1 rounded-full">Sandfly Vector</span>
+                        </div>
+                        <ul class="text-xs space-y-2 text-slate-600">
+                            <li><strong class="text-slate-800">Old World Vector:</strong> <em>Phlebotomus</em> sandfly (Asia, Africa, Europe).</li>
+                            <li><strong class="text-slate-800">New World Vector:</strong> <em>Lutzomyia</em> sandfly (Central/South America).</li>
+                            <li><strong class="text-slate-800">Infective Stage:</strong> Promastigote (in Sandfly proboscis).</li>
+                            <li><strong class="text-slate-800">Diagnostic Stage:</strong> Amastigote (intracellular LD bodies in macrophages).</li>
+                        </ul>
+                        <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 text-xs space-y-1">
+                            <p class="font-bold text-amber-900">Clinical Forms & High-Yield Key Points:</p>
+                            <p>• <strong>Cutaneous (CL):</strong> "Oriental sore" / Chiclero ulcer. Papule → violaceous ulcer w/ raised borders.</p>
+                            <p>• <strong>Mucocutaneous (MCL):</strong> <em>L. braziliensis</em>. Espundia (destruction of nasal septum/palate).</p>
+                            <p>• <strong>Visceral (VL / Kala-azar):</strong> <em>L. donovani</em> complex. Double quotidian fever, hepatosplenomegaly, skin darkening.</p>
+                            <p>• <strong>Post-Kala-Azar Dermal Leishmaniasis (PKDL):</strong> Hypopigmented macules/nodules years post-VL.</p>
+                            <p>• <strong>Montenegro Skin Test:</strong> (+) ≥5mm in CL & MCL; (-) in DCL & active Visceral Leishmaniasis.</p>
+                        </div>
+                    </div>
+
+                    <!-- Trypanosoma cruzi -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <h3 class="font-bold text-lg text-ust-navy flex items-center gap-2">
+                                <i class="fa-solid fa-bug text-red-500"></i> Trypanosoma cruzi
+                            </h3>
+                            <span class="text-xs bg-red-100 text-red-800 font-semibold px-2.5 py-1 rounded-full">Chagas Disease</span>
+                        </div>
+                        <ul class="text-xs space-y-2 text-slate-600">
+                            <li><strong class="text-slate-800">Vector:</strong> Triatomine bug / Reduviid bug / "Kissing bug" (<em>Triatoma, Rhodnius, Panstrongylus</em>).</li>
+                            <li><strong class="text-slate-800">Transmission Mode:</strong> Stercorarian transmission (feces rubbed into bite wound/conjunctiva).</li>
+                            <li><strong class="text-slate-800">Infective Stage:</strong> Metacyclic Trypomastigote (in bug feces).</li>
+                            <li><strong class="text-slate-800">Diagnostic Stage:</strong> Trypomastigote in blood (C/U/S shaped w/ large kinetoplast) & Amastigote in tissue.</li>
+                        </ul>
+                        <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-xs space-y-1">
+                            <p class="font-bold text-red-900">Must-Know Clinical Signs & Diagnosis:</p>
+                            <p>• <strong>Romaña's Sign:</strong> Unilateral painless palpebral edema (eyelid swelling) + conjunctivitis.</p>
+                            <p>• <strong>Chagoma:</strong> Erythematous subcutaneous nodule at bite site.</p>
+                            <p>• <strong>Chronic Phase:</strong> Apical Chagasic Cardiomyopathy, Megacolon, Megaesophagus.</p>
+                            <p>• <strong>Xenodiagnosis:</strong> Uninfected triatomine bugs allowed to feed on patient, then intestinal content examined after 30 days.</p>
+                            <p>• <strong>DOC:</strong> Nifurtimox and Benznidazole.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trypanosoma brucei Complex Breakdown Table -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-800 text-white px-4 py-3 font-bold text-sm flex items-center justify-between">
+                        <span><i class="fa-solid fa-scale-balanced me-2 text-ust-gold"></i> T. b. gambiense vs T. b. rhodesiense Board Comparison</span>
+                        <span class="text-xs font-normal text-slate-300">African Sleeping Sickness</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left text-slate-700">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-bold border-b">
+                                <tr>
+                                    <th class="p-3">Feature</th>
+                                    <th class="p-3 text-blue-900">Trypanosoma brucei gambiense</th>
+                                    <th class="p-3 text-red-900">Trypanosoma brucei rhodesiense</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-3 font-bold">Disease / Epidemiology</td>
+                                    <td class="p-3">West/Central African Sleeping Sickness (95% of cases)</td>
+                                    <td class="p-3">East African Sleeping Sickness (5% of cases)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">Vector</td>
+                                    <td class="p-3"><em>Glossina palpalis, G. tachynoides</em> (Tsetse fly)</td>
+                                    <td class="p-3"><em>Glossina morsitans</em> (Tsetse fly)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">Primary Reservoir</td>
+                                    <td class="p-3">Humans (Anthropic)</td>
+                                    <td class="p-3">Wild game animals & Cattle (Zoonotic)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">Disease Progression</td>
+                                    <td class="p-3">Chronic (months to years)</td>
+                                    <td class="p-3">Acute, fulminant (<9 months before death)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">Key Pathognomonic Signs</td>
+                                    <td class="p-3"><strong>Winterbottom's Sign:</strong> Posterior cervical lymphadenopathy.<br><strong>Kerandel's Sign:</strong> Delayed hyperesthesia to pain.</td>
+                                    <td class="p-3">Rapid CNS invasion, early myocarditis. Winterbottom's sign frequently ABSENT.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">Antigenic Variation</td>
+                                    <td class="p-3 font-semibold text-purple-700" colspan="2">VSG (Variant Surface Glycoproteins) gene switching every 5-10 days -> evades humoral immunity!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 12 Section -->
+            <div id="notes-mod12" class="space-y-6">
+                <!-- Module Header -->
+                <div class="border-l-4 border-ust-gold bg-emerald-50/50 p-4 rounded-r-xl">
+                    <h2 class="text-xl font-heading font-bold text-ust-navy flex items-center gap-2">
+                        <i class="fa-solid fa-viruses text-emerald-600"></i>
+                        Module 12: Plasmodium Species (Malaria Parasites)
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">Vector: Female <em>Anopheles minimus var. flavirostris</em> (night biter in slow-flowing streams). Man = Intermediate Host; Mosquito = Definitive (Final) Host.</p>
+                </div>
+
+                <!-- Plasmodium Species Comparison Table -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-800 text-white px-4 py-3 font-bold text-sm flex items-center justify-between">
+                        <span><i class="fa-solid fa-table me-2 text-ust-gold"></i> Ultimate Plasmodium Species Diagnostic Matrix</span>
+                        <span class="text-xs font-normal text-slate-300">5 Human Malaria Parasites</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left text-slate-700">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-bold border-b">
+                                <tr>
+                                    <th class="p-3">Species</th>
+                                    <th class="p-3">Malarial Fever Type</th>
+                                    <th class="p-3">Infected RBC Size</th>
+                                    <th class="p-3">RBC Stipplings</th>
+                                    <th class="p-3">Key Morphological Features</th>
+                                    <th class="p-3">Relapse vs Recrudescence</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-red-700">P. falciparum</td>
+                                    <td class="p-3">Malignant Tertian (36-48h)</td>
+                                    <td class="p-3">Normal-sized (Infects ALL RBC ages)</td>
+                                    <td class="p-3 font-semibold text-slate-900">Maurer's Dots<br><span class="text-[10px] text-slate-500">(Ferdinand Marcos = FM)</span></td>
+                                    <td class="p-3">• Small rings, Accolé/Applique form, double chromatin dots.<br>• <strong>Banana/Crescent Gametocyte</strong>.<br>• Schizonts sequestered in capillaries (RARE in PBS).</td>
+                                    <td class="p-3 font-bold text-amber-600">Recrudescence<br><span class="text-[10px] font-normal text-slate-500">(Drug resistance)</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-blue-700">P. vivax</td>
+                                    <td class="p-3">Benign Tertian (48h)</td>
+                                    <td class="p-3 text-blue-600 font-bold">Enlarged / Pale (Young RBCs/Reticulocytes)</td>
+                                    <td class="p-3 font-semibold text-slate-900">Schüffner's Dots<br><span class="text-[10px] text-slate-500">(Vilma Santos = VS)</span></td>
+                                    <td class="p-3">• Ameboid trophozoites.<br>• Schizont w/ 12-24 merozoites.<br>• Round/ovoid gametocytes.</td>
+                                    <td class="p-3 font-bold text-purple-600">Relapse<br><span class="text-[10px] font-normal text-slate-500">(Hypnozoites in liver)</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-emerald-700">P. malariae</td>
+                                    <td class="p-3">Quartan (72h)</td>
+                                    <td class="p-3">Normal-sized (Prefers OLD RBCs)</td>
+                                    <td class="p-3 font-semibold text-slate-900">Ziemann's Dots<br><span class="text-[10px] text-slate-500">(Manila Zoo = MZ)</span></td>
+                                    <td class="p-3">• <strong>Band form trophozoites</strong>.<br>• <strong>Rosette / Daisy head schizont</strong> (6-12 merozoites around dark central pigment).</td>
+                                    <td class="p-3 font-bold text-amber-600">Recrudescence<br><span class="text-[10px] font-normal text-slate-500">(Persists in blood up to 40 yrs)</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-purple-700">P. ovale</td>
+                                    <td class="p-3">Benign Tertian (48h)</td>
+                                    <td class="p-3 text-purple-600 font-bold">Enlarged, Oval, Ovaloid w/ Fimbriated/Ragged edges</td>
+                                    <td class="p-3 font-semibold text-slate-900">James' Dots<br><span class="text-[10px] text-slate-500">(Orange Juice = OJ)</span></td>
+                                    <td class="p-3">• Compact trophozoites.<br>• Schizont w/ 4-16 merozoites.<br>• Fimbriated RBC margins.</td>
+                                    <td class="p-3 font-bold text-purple-600">Relapse<br><span class="text-[10px] font-normal text-slate-500">(Hypnozoites in liver)</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold text-amber-800">P. knowlesi</td>
+                                    <td class="p-3">Quotidian (24h daily spike)</td>
+                                    <td class="p-3">Normal-sized (Zoonotic - Macaque monkey)</td>
+                                    <td class="p-3 font-semibold text-slate-900">Sinton & Mulligan's Dots</td>
+                                    <td class="p-3">• Rings resemble <em>P. falciparum</em>.<br>• Band forms resemble <em>P. malariae</em>.<br>• High parasitemia! PCR required.</td>
+                                    <td class="p-3 font-semibold text-slate-500">No Hypnozoites</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- High-Yield Pathophysiology & Diagnosis Card -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 space-y-2">
+                        <h4 class="font-bold text-sm text-ust-navy flex items-center gap-2">
+                            <i class="fa-solid fa-heart-pulse text-red-500"></i> Complications & Pathophysiology
+                        </h4>
+                        <div class="text-xs space-y-1 text-slate-600">
+                            <p>• <strong>Cytoadherence & Rosetting:</strong> PfEMP-1 knobs on <em>P. falciparum</em> RBCs adhere to ICAM-1 on microvascular endothelium causing microvascular obstruction & tissue anoxia.</p>
+                            <p>• <strong>Blackwater Fever:</strong> Massive intravascular hemolysis, hemoglobinuria (dark brown/black urine), acute renal failure.</p>
+                            <p>• <strong>Cerebral Malaria:</strong> Sequestration in brain capillaries -> coma, convulsions (15-20% mortality).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 space-y-2">
+                        <h4 class="font-bold text-sm text-ust-navy flex items-center gap-2">
+                            <i class="fa-solid fa-vial text-blue-500"></i> Laboratory Diagnosis
+                        </h4>
+                        <div class="text-xs space-y-1 text-slate-600">
+                            <p>• <strong>Thick Blood Smear:</strong> GOLD STANDARD for SCREENING (dehemoglobinized w/ water to lyse RBCs).</p>
+                            <p>• <strong>Thin Blood Smear:</strong> GOLD STANDARD for SPECIES IDENTIFICATION (fixed w/ methanol).</p>
+                            <p>• <strong>QBC (Quantitative Buffy Coat):</strong> Acridine orange fluorescent dye binds parasite nucleic acid in capillary tube.</p>
+                            <p>• <strong>RDT Antigens:</strong> PfHRP2 (<em>P. falciparum</em> specific), pLDH (Plasmodium lactate dehydrogenase), PMA (Pan-malarial antigen).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 space-y-2">
+                        <h4 class="font-bold text-sm text-ust-navy flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-emerald-500"></i> Protective Genetic Factors
+                        </h4>
+                        <div class="text-xs space-y-1 text-slate-600">
+                            <p>• <strong>Sickle Cell Trait (HbS) / HbC / HbE:</strong> Protects against severe <em>P. falciparum</em> malaria.</p>
+                            <p>• <strong>Duffy Blood Group Negative [Fy(a-b-)]:</strong> Complete resistance to <em>P. vivax</em> infection (lacks receptor for invasion).</p>
+                            <p>• <strong>G6PD Deficiency:</strong> Increased oxidative stress limits intracellular schizogony.</p>
+                            <p>• <strong>Hereditary Ovalocytosis & Thalassemia:</strong> Reduces cytoadherence & invasion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: INTERACTIVE LIFE CYCLES            -->
+        <!-- ========================================== -->
+        <section id="sec-lifecycles" class="hidden space-y-6">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-bold text-slate-800 text-sm">Select Life Cycle Diagram</h2>
+                    <p class="text-xs text-slate-500">Step-by-step vector & human phase interactive pathways</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="showLifeCycle('leishmania')" id="lc-btn-leishmania" class="lc-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-ust-gold text-ust-black cursor-pointer">Leishmania</button>
+                    <button type="button" onclick="showLifeCycle('tcruzi')" id="lc-btn-tcruzi" class="lc-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer">T. cruzi</button>
+                    <button type="button" onclick="showLifeCycle('tbrucei')" id="lc-btn-tbrucei" class="lc-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer">T. brucei</button>
+                    <button type="button" onclick="showLifeCycle('plasmodium')" id="lc-btn-plasmodium" class="lc-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer">Plasmodium</button>
+                </div>
+            </div>
+
+            <!-- Lifecycle Content Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+                <!-- Lifecycle Header -->
+                <div id="lc-header" class="border-b pb-4">
+                    <h3 class="text-xl font-heading font-bold text-ust-navy" id="lc-title">Leishmania spp. Life Cycle</h3>
+                    <p class="text-xs text-slate-500 mt-1" id="lc-desc">Sandfly Vector (Phlebotomus/Lutzomyia) &lt;---&gt; Human Reticuloendothelial System Host</p>
+                </div>
+
+                <!-- Interactive Step Viewer -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <!-- Dynamic Diagram SVG Container -->
+                    <div class="lg:col-span-7 bg-slate-900 rounded-xl p-6 min-h-[320px] flex flex-col items-center justify-center relative overflow-hidden" id="lc-diagram-box">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Step-by-Step Interactive Details -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-ust-gold" id="lc-phase-badge">Phase 1 of 5</span>
+                            <div class="flex space-x-1">
+                                <button type="button" onclick="prevLCStep()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition cursor-pointer"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                                <button type="button" onclick="nextLCStep()" class="w-8 h-8 rounded-lg bg-ust-navy hover:bg-ust-slate text-white flex items-center justify-center transition cursor-pointer"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <h4 class="font-heading font-bold text-sm text-ust-navy" id="lc-step-title">Step 1</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed" id="lc-step-text">Loading phase description...</p>
+                        </div>
+
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 space-y-1 text-xs">
+                            <p><strong class="text-amber-900">Infective Stage:</strong> <span id="lc-infective-stage" class="text-slate-700 font-semibold">Promastigote</span></p>
+                            <p><strong class="text-amber-900">Diagnostic Stage:</strong> <span id="lc-diagnostic-stage" class="text-slate-700 font-semibold">Amastigote</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: INTERACTIVE BOARD EXAM QUIZ        -->
+        <!-- ========================================== -->
+        <section id="sec-quiz" class="hidden space-y-6">
+            <!-- Quiz Mode Setup Modal / Controls Banner -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4">
+                    <div>
+                        <h2 class="font-heading font-bold text-lg text-ust-navy flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-ust-gold"></i> Parasitology Board Exam Practice Simulator
+                        </h2>
+                        <p class="text-xs text-slate-500">200 High-Yield Board Questions • 50 items per module per format</p>
+                    </div>
+
+                    <!-- Live Score & Progress -->
+                    <div class="flex items-center space-x-4 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
+                        <div class="text-center">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block">Score</span>
+                            <span class="text-sm font-extrabold text-emerald-600" id="quiz-score-display">0 / 0</span>
+                        </div>
+                        <div class="h-8 w-px bg-slate-300"></div>
+                        <div class="text-center">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block">Accuracy</span>
+                            <span class="text-sm font-extrabold text-ust-navy" id="quiz-accuracy-display">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Filters Configuration -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Module Topic</label>
+                        <select id="quiz-mod-select" onchange="initQuiz()" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-xs rounded-lg p-2.5 focus:ring-ust-gold focus:border-ust-gold">
+                            <option value="mod11">Module 11: Leishmania & Trypanosomes (50 Items)</option>
+                            <option value="mod12">Module 12: Plasmodium Species (50 Items)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Question Format</label>
+                        <select id="quiz-type-select" onchange="initQuiz()" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-xs rounded-lg p-2.5 focus:ring-ust-gold focus:border-ust-gold">
+                            <option value="mcq">Multiple Choice Questions (50 Items)</option>
+                            <option value="tf">True or False Questions (50 Items)</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button type="button" onclick="resetQuiz()" class="w-full bg-ust-navy hover:bg-ust-slate text-white font-bold text-xs p-2.5 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-rotate-right"></i> Restart Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Card Box -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+                <!-- Question Number & Progress Bar -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
+                        <span id="quiz-q-num">Question 1 of 50</span>
+                        <span id="quiz-q-category" class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Module 11 • MCQ</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div id="quiz-progress-bar" class="bg-ust-gold h-full transition-all duration-300" style="width: 2%;"></div>
+                    </div>
+                </div>
+
+                <!-- Question Text -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <p class="text-sm sm:text-base font-semibold text-slate-800 leading-relaxed" id="quiz-question-text">
+                        Loading question...
+                    </p>
+                </div>
+
+                <!-- Answer Choices Container -->
+                <div id="quiz-options-container" class="grid grid-cols-1 gap-3">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <!-- Instant Rationale & Explanation Box -->
+                <div id="quiz-rationale-box" class="hidden p-4 rounded-xl border space-y-1 transition-all">
+                    <h5 class="font-bold text-xs uppercase tracking-wider flex items-center gap-2" id="quiz-rationale-title">
+                        <!-- Correct/Incorrect badge -->
+                    </h5>
+                    <p class="text-xs leading-relaxed" id="quiz-rationale-text">
+                        <!-- Explanation text -->
+                    </p>
+                </div>
+
+                <!-- Next Question Button -->
+                <div class="flex justify-end pt-2">
+                    <button type="button" onclick="nextQuestion()" id="quiz-next-btn" class="hidden bg-ust-gold hover:bg-ust-goldDark text-ust-black font-extrabold text-xs px-6 py-3 rounded-lg shadow-md transition flex items-center gap-2 cursor-pointer">
+                        Next Question <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: PRACTICAL EXAM IDENTIFICATION       -->
+        <!-- ========================================== -->
+        <section id="sec-practical" class="hidden space-y-6">
+            <!-- Mode Switch Banner -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
+                        <i class="fa-solid fa-microscope text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-slate-800 text-sm">Practical Exam Identification Lab</h2>
+                        <p class="text-xs text-slate-500">Study morphological stages & test your slide reading skills</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button type="button" onclick="switchPracticalMode('study')" id="prac-mode-study" class="prac-mode-btn px-4 py-2 rounded-lg text-xs font-bold transition bg-ust-navy text-white cursor-pointer">Interactive Flashcards</button>
+                    <button type="button" onclick="switchPracticalMode('test')" id="prac-mode-test" class="prac-mode-btn px-4 py-2 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer">Timed Practical Exam</button>
+                </div>
+            </div>
+
+            <!-- MODE 1: STUDY FLASHCARDS -->
+            <div id="prac-study-view" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="flashcards-grid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <!-- MODE 2: TIMED PRACTICAL EXAM -->
+            <div id="prac-test-view" class="hidden space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6 max-w-3xl mx-auto">
+                    <div class="flex items-center justify-between border-b pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Microscope Slide #<span id="prac-q-num">1</span></span>
+                            <h3 class="font-heading font-bold text-base text-slate-800">Identify the Parasite & Developmental Stage</h3>
+                        </div>
+                        <div class="bg-purple-50 px-3 py-1.5 rounded-lg border border-purple-200 text-xs font-bold text-purple-900">
+                            Score: <span id="prac-score">0</span> / <span id="prac-total">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Slide Canvas Box -->
+                    <div class="bg-slate-900 rounded-xl p-6 min-h-[260px] flex items-center justify-center relative shadow-inner" id="prac-slide-canvas">
+                        <!-- Rendered by JS SVG -->
+                    </div>
+
+                    <!-- Option Buttons -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="prac-options-box">
+                        <!-- Options generated by JS -->
+                    </div>
+
+                    <!-- Feedback Rationale -->
+                    <div id="prac-feedback-box" class="hidden p-4 rounded-xl text-xs space-y-1">
+                        <!-- Feedback content -->
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="button" onclick="nextPracQuestion()" id="prac-next-btn" class="hidden bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition cursor-pointer">Next Slide <i class="fa-solid fa-arrow-right ms-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-ust-navy text-slate-400 border-t border-slate-800 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-2">
+            <p class="text-white font-semibold">Designed for UST Medical Students • Parasitology Modules 11 & 12 Reviewer</p>
+            <p class="text-slate-500">Based on lectures by Dr. Lourdes Trinidad M. Dominguez • Academic Year 2025-2026</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // ==========================================
+        // DATA STRUCTURES: QUIZ & PRACTICALS
+        // ==========================================
+
+        // MODULE 11 MCQ (50 COMPLETELY UNIQUE HIGH-YIELD ITEMS)
+        const mod11_mcq = [
+            { q: "Which morphological stage of Leishmania spp. is injected into the mammalian host by the female sandfly vector during a blood meal?", options: ["Amastigote", "Promastigote", "Epimastigote", "Trypomastigote"], ans: 1, explanation: "Promastigotes reside in the proboscis of the sandfly vector and represent the infective stage to human hosts." },
+            { q: "Intracellular Leishman-Donovan (LD) bodies observed within macrophages in splenic or bone marrow aspirates represent which stage?", options: ["Promastigote", "Epimastigote", "Amastigote", "Metacyclic Trypomastigote"], ans: 2, explanation: "Amastigotes (LD bodies) are oval, non-motile intracellular forms (3-5 µm) that multiply inside reticuloendothelial macrophages." },
+            { q: "Old World Leishmaniasis (Asia, Africa, Southern Europe) is primarily transmitted by female sandflies belonging to which genus?", options: ["Lutzomyia", "Phlebotomus", "Glossina", "Triatoma"], ans: 1, explanation: "Phlebotomus is the vector genus for Old World Leishmaniasis, whereas Lutzomyia transmits New World Leishmaniasis." },
+            { q: "Which Leishmania species complex is the main causative agent of Mucocutaneous Leishmaniasis (Espundia) in South America?", options: ["L. tropica", "L. donovani", "L. braziliensis complex", "L. major"], ans: 2, explanation: "L. braziliensis complex causes mucocutaneous leishmaniasis characterized by destruction of the nasal septum and oral mucosa." },
+            { q: "A positive Montenegro Leishmania skin test (delayed-type hypersensitivity) is defined by an induration measuring:", options: ["≥ 2 mm at 24 hours", "≥ 5 mm at 72 hours", "≥ 10 mm at 48 hours", "≥ 15 mm at 72 hours"], ans: 1, explanation: "A positive Montenegro test requires an induration of ≥ 5 mm read at 72 hours, demonstrating cell-mediated immunity." },
+            { q: "In which form of Leishmaniasis is the Montenegro skin test characteristically NEGATIVE due to anergy?", options: ["Cutaneous Leishmaniasis (CL)", "Mucocutaneous Leishmaniasis (MCL)", "Diffuse Cutaneous Leishmaniasis (DCL)", "Resolved Oriental Sore"], ans: 2, explanation: "DCL and active Visceral Leishmaniasis yield negative skin tests because patients lack cell-mediated immunity (CMI) against the parasite." },
+            { q: "The double quotidian fever spike (fever pattern occurring twice daily) is classic for acute cases of:", options: ["Chagas disease", "Visceral Leishmaniasis (Kala-azar)", "Gambian Sleeping Sickness", "Rhodesian Sleeping Sickness"], ans: 1, explanation: "Visceral Leishmaniasis (L. donovani complex) typically produces double quotidian daily fever spikes during its acute onset." },
+            { q: "What is the infective stage of Trypanosoma cruzi passed in the feces of triatomine bugs?", options: ["Epimastigote", "Amastigote", "Metacyclic trypomastigote", "Procyclic trypomastigote"], ans: 2, explanation: "Metacyclic trypomastigotes passed in triatomine feces enter the host via the bite wound or mucous membranes (stercorarian transmission)." },
+            { q: "Unilateral painless palpebral edema and conjunctivitis following ocular entry of T. cruzi is known as:", options: ["Winterbottom's sign", "Romaña's sign", "Kerandel's sign", "Chagoma"], ans: 1, explanation: "Romaña's sign is pathognomonic for acute Chagas disease when the parasite enters through the ocular conjunctiva." },
+            { q: "An erythematous subcutaneous nodule forming at the dermal entry site of Trypanosoma cruzi is called a:", options: ["Chancre", "Chagoma", "Espundia", "Oriental button"], ans: 1, explanation: "A Chagoma represents the initial localized inflammatory nodule at the site of T. cruzi inoculation." },
+            { q: "Which diagnostic technique utilizes lab-reared uninfected reduviid bugs allowed to feed on suspected Chagas patients?", options: ["Montenegro test", "Xenodiagnosis", "Card Agglutination Test (CATT)", "Quantitative Buffy Coat"], ans: 1, explanation: "Xenodiagnosis involves feeding uninfected bugs on a patient and later examining the bug's intestinal contents for T. cruzi." },
+            { q: "Chronic Chagas disease leads to megacolon, megaesophagus, and dilated cardiomyopathy primarily due to destruction of:", options: ["Autonomic nerve plexuses and cardiac muscle cells", "Skeletal motor endplates", "Renal tubular epithelium", "Cerebellar Purkinje cells"], ans: 0, explanation: "Intracellular amastigote multiplication in tissues destroys autonomic nerve plexuses (e.g., Auerbach's plexus) and myocardiocytes." },
+            { q: "Which organism is the causative agent of West African / Gambian Chronic Sleeping Sickness?", options: ["Trypanosoma brucei rhodesiense", "Trypanosoma brucei gambiense", "Trypanosoma cruzi", "Leishmania infantum"], ans: 1, explanation: "T. b. gambiense causes West African sleeping sickness, accounting for ~95% of human African trypanosomiasis (HAT) cases." },
+            { q: "What is the principal tsetse fly vector species transmitting Trypanosoma brucei gambiense?", options: ["Glossina morsitans", "Glossina palpalis", "Phlebotomus papatasi", "Rhodnius prolixus"], ans: 1, explanation: "Glossina palpalis and Glossina tachynoides are riverine tsetse flies that transmit T. b. gambiense in West and Central Africa." },
+            { q: "Winterbottom's sign in West African trypanosomiasis is clinically defined as painless enlargement of:", options: ["Axillary lymph nodes", "Posterior cervical lymph nodes", "Inguinal lymph nodes", "Epitrochlear lymph nodes"], ans: 1, explanation: "Winterbottom's sign is pathognomonic cervical lymphadenopathy located specifically in the posterior cervical chain." },
+            { q: "Kerandel's sign observed in late meningoencephalic stage African sleeping sickness refers to:", options: ["Unilateral palpebral swelling", "Delayed hyperesthesia / pain sensation following pressure", "A central eschar on the shin", "Post-prandial somnolence"], ans: 1, explanation: "Kerandel's sign is a delayed sensation of intense pain following soft tissue compression or light trauma." },
+            { q: "Trypanosomes evade the host humoral immune response through periodic switching of surface coat antigens known as:", options: ["Histidine-rich proteins (HRP)", "Variant Surface Glycoproteins (VSG)", "Circumsporozoite antigens", "Duffy binding ligands"], ans: 1, explanation: "VSG gene switching every 5-10 days alters the surface coat, allowing T. brucei parasites to constantly evade antibody neutralization." },
+            { q: "How does Trypanosoma brucei rhodesiense differ clinically from Trypanosoma brucei gambiense?", options: ["T. b. rhodesiense causes an acute, fulminant disease with early CNS invasion and wild game reservoirs", "T. b. rhodesiense is transmitted by sandflies", "T. b. rhodesiense forms tissue amastigotes", "T. b. rhodesiense is chronic over 10 years"], ans: 0, explanation: "T. b. rhodesiense (East African) is a zoonosis causing acute, rapidly fatal illness (<9 months) with high parasitemia." },
+            { q: "What is the primary drug of choice (DOC) for acute Trypanosoma cruzi infection?", options: ["Pentamidine", "Sodium stibogluconate", "Nifurtimox or Benznidazole", "Artemether-Lumefantrine"], ans: 2, explanation: "Nifurtimox and Benznidazole are the main trypanocidal drugs effective during acute T. cruzi infection." },
+            { q: "Which specialized culture medium is routinely used to isolate Leishmania promastigotes and Trypanosoma species?", options: ["Sabouraud Dextrose Agar", "Novy-MacNeal-Nicolle (NNN) medium", "Loeffler serum slope", "Thayer-Martin agar"], ans: 1, explanation: "NNN medium (blood agar based) supports the culture growth of flagellated hemoflagellates (promastigotes/epimastigotes)." },
+            { q: "Which vector transmits East African Sleeping Sickness (Trypanosoma brucei rhodesiense)?", options: ["Glossina palpalis", "Glossina morsitans", "Lutzomyia longipalpis", "Triatoma dimidiata"], ans: 1, explanation: "Glossina morsitans is a savanna tsetse fly vector for T. b. rhodesiense in East Africa." },
+            { q: "Where does the development of infective metacyclic trypomastigotes take place inside the tsetse fly?", options: ["Hindgut", "Proboscis and Salivary glands", "Malpighian tubules", "Haemolymph"], ans: 1, explanation: "In T. brucei, epimastigotes migrate to the tsetse fly salivary glands where they transform into metacyclic trypomastigotes." },
+            { q: "Post-Kala-Azar Dermal Leishmaniasis (PKDL) appears clinically as hypopigmented macules or nodules following treatment of:", options: ["L. major infection", "L. donovani (Visceral Leishmaniasis)", "L. braziliensis infection", "T. cruzi infection"], ans: 1, explanation: "PKDL is a dermatological sequela that develops months to years after successful or partial treatment of Visceral Leishmaniasis." },
+            { q: "Chiclero ulcer (Bay sore), typically located on the pinna of the ear, is caused by:", options: ["L. mexicana", "L. donovani", "T. brucei", "L. infantum"], ans: 0, explanation: "L. mexicana causes Chiclero ulcer, commonly affecting forest workers (chicleros) on the ear cartilage." },
+            { q: "In Leishmania amastigotes, the axoneme originates from which prominent organelle?", options: ["Nucleolus", "Kinetoplast", "Undulating membrane", "Glycosome"], ans: 1, explanation: "The axoneme arises from the kinetoplast and extends toward the anterior tip of the amastigote." },
+            { q: "Which non-vector mode of transmission can transmit both Leishmania and Trypanosoma cruzi?", options: ["Inhalation of spores", "Vertical (mother-to-baby) transmission and blood transfusion", "Ingestion of cysts in undercooked pork", "Freshwater snail contact"], ans: 1, explanation: "Blood transfusion, organ transplantation, and vertical (congenital) transmission are established non-vector pathways." },
+            { q: "Dry or oriental sore is characteristically caused by Old World species:", options: ["Leishmania tropica", "Leishmania major", "Leishmania chagasi", "Leishmania amazonensis"], ans: 0, explanation: "L. tropica causes dry/urban cutaneous leishmaniasis, whereas L. major causes moist/rural cutaneous sores." },
+            { q: "What is the pathognomonic CSF finding specified by WHO for CNS stage African Trypanosomiasis?", options: ["Decreased CSF glucose only", "Elevated CSF protein (especially IgM) and WBC > 5/µL", "Presence of intracellular amastigotes", "Eosinophilia > 50%"], ans: 1, explanation: "Increased CSF protein (pathognomonic IgM elevation) and CSF leukocytosis (>5 WBCs/µL) indicate CNS stage disease." },
+            { q: "The Card Agglutination Trypanosomiasis Test (CATT) is widely used for field screening of:", options: ["T. cruzi", "T. b. gambiense", "L. donovani", "P. falciparum"], ans: 1, explanation: "CATT is a rapid field serological test used for population screening of West African trypanosomiasis (T. b. gambiense)." },
+            { q: "What morphological form of T. cruzi is found replicating inside infected heart tissue pseudocysts?", options: ["Trypomastigote", "Epimastigote", "Amastigote", "Promastigote"], ans: 2, explanation: "T. cruzi multiplies exclusively as intracellular amastigotes within cardiac myocytes and skeletal tissue." },
+            { q: "Which clinical feature is UNCOMMON or frequently absent in East African Sleeping Sickness (T. b. rhodesiense)?", options: ["High fever", "Winterbottom's sign", "Myocarditis", "Rapid death"], ans: 1, explanation: "Winterbottom's sign (cervical lymphadenopathy) is frequent in chronic T. b. gambiense but often absent in acute T. b. rhodesiense." },
+            { q: "The initial lesion formed at the tsetse fly bite site within 1-2 weeks is termed a:", options: ["Chagoma", "Trypanosomal Chancre", "Oriental Sore", "Erythema migrans"], ans: 1, explanation: "A painful, indurated, erythematous chancre can form at the tsetse fly inoculation site prior to systemic spread." },
+            { q: "Which flagellate morphological stage is completely ABSENT in the life cycle of Leishmania spp.?", options: ["Amastigote", "Promastigote", "Trypomastigote", "None of the above"], ans: 2, explanation: "Leishmania species exist only as amastigotes (in vertebrates) and promastigotes (in vectors/culture); trypomastigotes never form." },
+            { q: "Which animal acts as the major domestic reservoir host for Visceral Leishmaniasis caused by L. infantum / L. chagasi?", options: ["Pigs", "Dogs", "Snakes", "Chickens"], ans: 1, explanation: "Canines (dogs) serve as the primary reservoir for L. infantum / L. chagasi, making canine control vital." },
+            { q: "What is the structural position of the kinetoplast relative to the nucleus in a Trypomastigote?", options: ["Anterior to the nucleus", "Posterior to the nucleus near the posterior end", "Adjacent to the anterior tip", "Inside the nucleus"], ans: 1, explanation: "In trypomastigotes, the kinetoplast lies posterior to the nucleus, with an undulating membrane traversing the entire length." },
+            { q: "Stercorarian transmission refers to parasite entry via:", options: ["Vector salivary secretions", "Vector feces deposited during blood meal", "Direct penetration through intact skin without vector", "Ingestion of vector eggs"], ans: 1, explanation: "Stercorarian transmission (posterior station) means the parasite is passed in vector feces (e.g., T. cruzi)." },
+            { q: "Salivarian transmission is characteristic of which parasite?", options: ["Trypanosoma cruzi", "Trypanosoma brucei", "Leishmania braziliensis", "Plasmodium malariae"], ans: 1, explanation: "Salivarian transmission (anterior station) means the infective stage is injected directly through vector saliva (e.g., T. brucei)." },
+            { q: "Which drug is used for late-stage African Sleeping Sickness with CNS involvement despite its arsenic toxicity?", options: ["Pentamidine", "Melarsoprol", "Chloroquine", "Suramin"], ans: 1, explanation: "Melarsoprol is an organic arsenical compound used for late-stage CNS trypanosomiasis as it crosses the blood-brain barrier." },
+            { q: "Which subgenus of Leishmania develops in the hindgut of the sandfly vector?", options: ["Leishmania subgenus L. leishmania", "Leishmania subgenus L. viannia", "Leishmania subgenus L. donovani", "Leishmania subgenus L. tropica"], ans: 1, explanation: "Subgenus L. viannia parasites develop in the hindgut (peripylaria), whereas L. leishmania species develop in the midgut/foregut." },
+            { q: "A patient presenting with destruction of the nasal cartilage ('tapir nose' deformity) most likely acquired the infection in:", options: ["West Africa", "Central and South America", "Southeast Asia", "Middle East"], ans: 1, explanation: "Espundia (Mucocutaneous Leishmaniasis caused by L. braziliensis) is endemic to Central and South America." },
+            { q: "What morphological shape characterizes bloodstream Trypanosoma cruzi trypomastigotes in thin blood smears?", options: ["Straight rod shape", "C, U, or S shape with a large kinetoplast", "Perfect circle", "Banana shape"], ans: 1, explanation: "T. cruzi trypomastigotes in blood smears typically adopt a rigid C-, U-, or S-shape with a prominent kinetoplast." },
+            { q: "Primary vector for Leishmania infantum in the Mediterranean basin is:", options: ["Phlebotomus spp.", "Lutzomyia spp.", "Glossina spp.", "Anopheles spp."], ans: 0, explanation: "Phlebotomus sandflies transmit Old World Leishmania species including L. infantum in the Mediterranean." },
+            { q: "Which tissue site is most heavily parasitized by amastigotes in Visceral Leishmaniasis?", options: ["Reticuloendothelial cells of spleen, liver, and bone marrow", "Peripheral nerve sheaths", "Corneal epithelium", "Glomerular basement membrane"], ans: 0, explanation: "Visceral Leishmaniasis targets macrophages throughout the reticuloendothelial system (spleen, liver, bone marrow, lymph nodes)." },
+            { q: "How do male and female tsetse flies compare regarding Trypanosoma transmission?", options: ["Only females transmit T. brucei", "Both male and female tsetse flies bite and transmit T. brucei", "Only males transmit T. brucei", "Neither bites humans"], ans: 1, explanation: "Unlike mosquitoes (where only females feed on blood), both male and female tsetse flies take blood meals and transmit disease." },
+            { q: "In acute Chagas disease, myocarditis and heart failure stem from amastigote destruction of:", options: ["Coronary arteries", "Cardiac myocytes", "Pericardial fluid", "Heart valves only"], ans: 1, explanation: "Amastigote pseudocysts multiply within cardiac myocytes, causing focal necrosis, inflammation, and heart failure." },
+            { q: "The primary diagnostic stage seen in peripheral blood smears of patients with West African Sleeping Sickness is:", options: ["Amastigote", "Promastigote", "Trypomastigote", "Epimastigote"], ans: 2, explanation: "Trypomastigotes are the diagnostic stage present in blood, lymph node aspirates, or CSF in T. brucei infections." },
+            { q: "What distinguishes the kinetoplast of Trypanosoma cruzi from that of Trypanosoma brucei?", options: ["T. cruzi has a conspicuously large kinetoplast", "T. brucei has no kinetoplast", "T. cruzi kinetoplast is anterior", "T. brucei kinetoplast is inside the nucleus"], ans: 0, explanation: "T. cruzi trypomastigotes feature a distinctly large, prominent kinetoplast at their posterior tip." },
+            { q: "Which medication is specifically effective for early-stage (hemolymphatic) T. b. gambiense prior to CNS invasion?", options: ["Pentamidine", "Melarsoprol", "Eflornithine", "Benznidazole"], ans: 0, explanation: "Pentamidine is the standard treatment for early stage hemolymphatic T. b. gambiense infection." },
+            { q: "Which animal reservoir is key to maintaining the sylvatic cycle of T. b. rhodesiense in East Africa?", options: ["Wild ungulates/antelopes and cattle", "Domestic cats", "Rats only", "Fruit bats"], ans: 0, explanation: "Wild game animals (bushbuck, antelopes) and cattle act as major zoonotic reservoirs for T. b. rhodesiense." },
+            { q: "Leishmania promastigotes multiply inside the sandfly gut by:", options: ["Multiple fission (schizogony)", "Longitudinal binary fission", "Sporogony", "Budding"], ans: 1, explanation: "Extracellular promastigotes replicate by simple longitudinal binary fission within the vector gut." }
+        ];
+
+        // MODULE 11 TRUE/FALSE (50 Items)
+        const mod11_tf = [
+            { q: "Promastigotes represent the infective stage of Leishmania injected into humans by sandflies.", ans: true, explanation: "TRUE. Promastigotes reside in the sandfly proboscis and enter humans during a blood meal." },
+            { q: "Trypanosoma cruzi is transmitted via the bite saliva of reduviid bugs (salivarian transmission).", ans: false, explanation: "FALSE. T. cruzi is transmitted through bug FECES rubbed into wounds (stercorarian transmission)." },
+            { q: "Both male and female tsetse flies can transmit African Trypanosomiasis.", ans: true, explanation: "TRUE. Both sexes of Glossina flies feed on blood and can transmit T. brucei." },
+            { q: "Amastigotes are extracellular flagellated forms found swimming in human peripheral blood.", ans: false, explanation: "FALSE. Amastigotes are strictly intracellular, non-motile forms without a free flagellum." },
+            { q: "Winterbottom's sign refers to painless swelling of posterior cervical lymph nodes in T. b. gambiense.", ans: true, explanation: "TRUE. Posterior cervical lymphadenopathy is known as Winterbottom's sign." },
+            { q: "Leishmania species form intracellular tissue cysts containing trypomastigotes.", ans: false, explanation: "FALSE. Leishmania forms amastigotes inside macrophages; trypomastigote forms never occur in Leishmania." },
+            { q: "Chagas disease is endemic to South and Central America.", ans: true, explanation: "TRUE. T. cruzi (American trypanosomiasis) is restricted to the Americas." },
+            { q: "The Montenegro skin test is positive in active Visceral Leishmaniasis (Kala-azar).", ans: false, explanation: "FALSE. Patients with active Visceral Leishmaniasis lack cell-mediated immunity and test negative." },
+            { q: "Kerandel's sign is characterized by delayed hyperesthesia to pain in late African trypanosomiasis.", ans: true, explanation: "TRUE. Kerandel's sign is a delayed pain response characteristic of CNS stage sleeping sickness." },
+            { q: "Trypanosoma brucei rhodesiense causes a chronic infection lasting many years before death.", ans: false, explanation: "FALSE. T. b. rhodesiense causes an acute, rapidly fulminant disease leading to death in <9 months." },
+            { q: "Lutzomyia sandflies are the vectors for New World Leishmaniasis in the Americas.", ans: true, explanation: "TRUE. Lutzomyia transmits New World species, while Phlebotomus transmits Old World species." },
+            { q: "Xenodiagnosis uses lab-reared triatomine bugs to detect low T. cruzi parasitemia.", ans: true, explanation: "TRUE. Bugs feed on the patient and their gut content is examined 30 days later." },
+            { q: "Espundia involves destruction of the nasopharyngeal mucous membranes.", ans: true, explanation: "TRUE. Mucocutaneous Leishmaniasis (L. braziliensis) leads to severe nasal/palatal erosion." },
+            { q: "T. cruzi amastigotes multiply inside cardiac muscle cells forming pseudocysts.", ans: true, explanation: "TRUE. Intracellular multiplication in cardiac myocytes produces characteristic amastigote pseudocysts." },
+            { q: "Cardagglutination Trypanosomiasis Test (CATT) is used to screen for T. cruzi.", ans: false, explanation: "FALSE. CATT is used for mass screening of T. b. gambiense (African sleeping sickness)." },
+            { q: "Variant Surface Glycoproteins (VSG) enable T. brucei to undergo antigenic variation.", ans: true, explanation: "TRUE. Switching VSG coat genes allows T. brucei to continually evade host antibodies." },
+            { q: "Romaña's sign is bilateral painful periorbital edema seen in Kala-azar.", ans: false, explanation: "FALSE. Romaña's sign is UNILATERAL painless eyelid edema pathognomonic for acute Chagas disease." },
+            { q: "Novy-MacNeal-Nicolle (NNN) medium is used to culture hemoflagellates.", ans: true, explanation: "TRUE. NNN agar culture allows growth and isolation of promastigotes and epimastigotes." },
+            { q: "Chiclero ulcer characteristically affects the pinna of the ear.", ans: true, explanation: "TRUE. L. mexicana infection (Chiclero ulcer) frequently involves ear cartilage." },
+            { q: "Pentamidine is effective for late-stage T. b. gambiense with CNS invasion.", ans: false, explanation: "FALSE. Pentamidine does not cross the blood-brain barrier; it is used only for early stage disease." },
+            { q: "Amastigotes of Leishmania are also known as Leishman-Donovan (LD) bodies.", ans: true, explanation: "TRUE. Tissue amastigotes inside macrophages are classically called LD bodies." },
+            { q: "T. b. gambiense relies heavily on wild animal reservoirs such as antelopes.", ans: false, explanation: "FALSE. Humans are the primary reservoir for T. b. gambiense; wild game are reservoirs for T. b. rhodesiense." },
+            { q: "Triatomine bugs defecate on host skin while taking a blood meal.", ans: true, explanation: "TRUE. Defecation during feeding deposits infective metacyclic trypomastigotes on the skin." },
+            { q: "Visceral Leishmaniasis causes marked hepatosplenomegaly and bone marrow suppression.", ans: true, explanation: "TRUE. Reticuloendothelial infiltration causes massive enlargement of spleen/liver and pancytopenia." },
+            { q: "Epimastigotes have a kinetoplast located posterior to the nucleus.", ans: false, explanation: "FALSE. In epimastigotes, the kinetoplast lies ANTERIOR to the nucleus near the undulating membrane origin." },
+            { q: "Post-Kala-Azar Dermal Leishmaniasis manifests as hypopigmented skin macules.", ans: true, explanation: "TRUE. PKDL causes hypopigmented lesions post-treatment of L. donovani infection." },
+            { q: "T. cruzi blood trypomastigotes multiply actively by binary fission in blood plasma.", ans: false, explanation: "FALSE. Blood trypomastigotes do NOT divide; multiplication occurs only as intracellular amastigotes." },
+            { q: "Glossina palpalis tsetse flies inhabit riverine vegetation in West Africa.", ans: true, explanation: "TRUE. G. palpalis is a riverine vector species for T. b. gambiense." },
+            { q: "Kala-azar translates to 'black fever' due to characteristic skin darkening.", ans: true, explanation: "TRUE. Hyperpigmentation of hands, feet, and abdomen gives Visceral Leishmaniasis its name." },
+            { q: "Nifurtimox is an effective drug for African sleeping sickness CNS disease.", ans: false, explanation: "FALSE. Nifurtimox is primarily used for American Trypanosomiasis (Chagas disease)." },
+            { q: "Amastigotes possess a long, free anterior flagellum for rapid motility.", ans: false, explanation: "FALSE. Amastigotes lack a free flagellum and are non-motile." },
+            { q: "A Chagoma is an indurated skin lesion at the site of T. cruzi entry.", ans: true, explanation: "TRUE. Chagoma represents local cutaneous edema at the bite site." },
+            { q: "T. b. rhodesiense accounts for over 95% of all human African trypanosomiasis cases.", ans: false, explanation: "FALSE. T. b. gambiense accounts for ~95%; T. b. rhodesiense accounts for only ~5%." },
+            { q: "Melarsoprol treatment can cause severe post-treatment reactive encephalopathy.", ans: true, explanation: "TRUE. Melarsoprol carries a 5-10% risk of fatal arsenical encephalopathy." },
+            { q: "Subgenus Leishmania (L. viannia) parasites develop in the sandfly hindgut.", ans: true, explanation: "TRUE. L. viannia species are peripylarian, developing in the vector hindgut before migrating forward." },
+            { q: "Chagasic megacolon results from destruction of enteric ganglion cells.", ans: true, explanation: "TRUE. Denervation of the myenteric plexus leads to aperistalsis and organ megadilation." },
+            { q: "Tsetse fly bites are painless and go completely unnoticed by humans.", ans: false, explanation: "FALSE. Tsetse fly bites are distinctly painful, often producing a tender chancre." },
+            { q: "Splenic aspirate smear is the most sensitive diagnostic procedure for Visceral Leishmaniasis.", ans: true, explanation: "TRUE. Splenic aspirate (>95% sensitivity) shows numerous LD bodies, though bone marrow is safer." },
+            { q: "T. cruzi trypomastigotes characteristically assume a C-shape in fixed blood films.", ans: true, explanation: "TRUE. C- or U-shaped morphology with a huge kinetoplast is classic for T. cruzi." },
+            { q: "Leishmania major causes moist, rural cutaneous leishmaniasis with early ulceration.", ans: true, explanation: "TRUE. L. major causes wet/rural sores that ulcerate rapidly compared to L. tropica." },
+            { q: "Dogs serve as important reservoir hosts for Leishmania infantum.", ans: true, explanation: "TRUE. Domestic dogs represent the main reservoir for zoonotic visceral leishmaniasis." },
+            { q: "Presence of IgM in CSF is pathognomonic for meningoencephalic African trypanosomiasis.", ans: true, explanation: "TRUE. Intrathecal IgM synthesis indicates parasite invasion across the blood-brain barrier." },
+            { q: "Trypanosoma brucei parasites form amastigotes inside human skeletal muscle.", ans: false, explanation: "FALSE. T. brucei remains extracellular throughout its human infection; it does NOT form amastigotes." },
+            { q: "Suramin is used to treat early-stage T. b. rhodesiense infection.", ans: true, explanation: "TRUE. Suramin is the drug of choice for first-stage (hemolymphatic) East African trypanosomiasis." },
+            { q: "Sandflies breed in stagnant open freshwater ponds.", ans: false, explanation: "FALSE. Sandflies breed in dark, moist soil rich in organic matter (burrows, termite mounds), not water." },
+            { q: "Congenital transmission of Chagas disease from mother to fetus can occur.", ans: true, explanation: "TRUE. T. cruzi can cross the placenta causing congenital Chagas disease." },
+            { q: "Trypanosomal chancre resolves spontaneously after 2-3 weeks.", ans: true, explanation: "TRUE. The local bite chancre typically heals on its own as parasites enter blood." },
+            { q: "Leishmania braziliensis lesions can spread via lymphatics to distant mucous membranes.", ans: true, explanation: "TRUE. Hematogenous or lymphatic dissemination leads to late mucosal destruction." },
+            { q: "Trypanosoma cruzi possesses a small, inconspicuous kinetoplast.", ans: false, explanation: "FALSE. T. cruzi is famous for its exceptionally LARGE, prominent kinetoplast." },
+            { q: "Eflornithine is effective against late-stage T. b. gambiense sleeping sickness.", ans: true, explanation: "TRUE. Eflornithine (DFMO) inhibits ornithine decarboxylase and treats CNS stage T. b. gambiense." }
+        ];
+
+        // MODULE 12 MCQ (50 Items)
+        const mod12_mcq = [
+            { q: "Which Plasmodium species infects red blood cells of ALL ages, leading to hyperparasitemia and life-threatening complications?", options: ["P. vivax", "P. malariae", "P. falciparum", "P. ovale"], ans: 2, explanation: "P. falciparum is unselective, invading reticulocytes and mature RBCs alike, causing massive biomass expansion." },
+            { q: "What is the principal mosquito vector of Malaria in the Philippines?", options: ["Anopheles balabacensis", "Anopheles minimus var. flavirostris", "Aedes aegypti", "Culex quinquefasciatus"], ans: 1, explanation: "Female Anopheles minimus var. flavirostris is the primary vector, breeding in clean, shaded, slow-flowing streams." },
+            { q: "Crescent- or banana-shaped gametocytes in a peripheral blood smear are diagnostic for:", options: ["Plasmodium vivax", "Plasmodium falciparum", "Plasmodium malariae", "Plasmodium ovale"], ans: 1, explanation: "Banana-shaped gametocytes are unique and pathognomonic for Plasmodium falciparum." },
+            { q: "Schüffner's dots (stippling) appear in enlarged erythrocytes infected by which pair of species?", options: ["P. falciparum & P. malariae", "P. vivax & P. ovale", "P. malariae & P. knowlesi", "P. falciparum & P. vivax"], ans: 1, explanation: "Schüffner's dots (Vilma Santos = VS) stain as eosinophilic stippling in enlarged RBCs infected by P. vivax or P. ovale." },
+            { q: "True malarial relapse in P. vivax and P. ovale infections results from reactivation of dormant liver forms called:", options: ["Trophozoites", "Hypnozoites", "Ookinetes", "Cryptozoites"], ans: 1, explanation: "Hypnozoites remain dormant in hepatocytes for months to years before reactivating to initiate new erythrocytic cycles." },
+            { q: "Rosette or daisy-head schizonts containing 6-12 merozoites surrounding a central brown pigment mass are classic for:", options: ["Plasmodium falciparum", "Plasmodium malariae", "Plasmodium vivax", "Plasmodium knowlesi"], ans: 1, explanation: "P. malariae mature schizonts characteristically form symmetrical rosettes of 6-12 merozoites." },
+            { q: "Individuals lacking which blood group antigen display complete natural resistance to Plasmodium vivax invasion?", options: ["Rh factor", "Duffy antigen [Fy(a-b-)]", "Kell antigen", "MN antigen"], ans: 1, explanation: "Duffy antigen serves as the essential receptor for P. vivax merozoite attachment; Duffy-negative RBCs are immune." },
+            { q: "Thick band-form trophozoites extending across the diameter of normal-sized RBCs are typical of:", options: ["Plasmodium falciparum", "Plasmodium malariae", "Plasmodium ovale", "Plasmodium knowlesi"], ans: 1, explanation: "P. malariae trophozoites frequently form compact band shapes across non-enlarged erythrocytes." },
+            { q: "Blackwater Fever in severe falciparum malaria is caused by:", options: ["Bacterial cystitis", "Massive intravascular hemolysis leading to dark hemoglobinuria", "Direct renal tubular secretion of dark bile", "Glomerular amyloid deposition"], ans: 1, explanation: "Blackwater fever involves sudden, severe intravascular hemolysis producing dark red-black urine (hemoglobinuria)." },
+            { q: "Which blood smear technique is fixed with methanol and used specifically for SPECIES IDENTIFICATION?", options: ["Thick blood smear", "Thin blood smear", "Buffy coat smear", "Wet mount smear"], ans: 1, explanation: "Thin blood smear preserves intact RBC morphology, allowing accurate species identification based on RBC size and stippling." },
+            { q: "Maurer's dots (stippling) are associated with erythrocytes infected by:", options: ["Plasmodium falciparum", "Plasmodium vivax", "Plasmodium malariae", "Plasmodium ovale"], ans: 0, explanation: "Maurer's dots (Ferdinand Marcos = FM mnemonic) are coarse, dark dots seen in P. falciparum infected RBCs." },
+            { q: "Which knob protein expressed on P. falciparum infected RBCs mediates cytoadherence to endothelial ICAM-1?", options: ["PfHRP-2", "PfEMP-1", "pLDH", "Circumsporozoite protein"], ans: 1, explanation: "Plasmodium falciparum erythrocyte membrane protein 1 (PfEMP-1) is the main cytoadherence ligand causing microvascular clogging." },
+            { q: "What is the fever paroxysm periodicity of Plasmodium malariae (Quartan Malaria)?", options: ["Every 24 hours", "Every 36 hours", "Every 48 hours", "Every 72 hours"], ans: 3, explanation: "P. malariae has a 72-hour asexual erythrocytic cycle, producing fever paroxysms every 4th day (Quartan)." },
+            { q: "Which human malaria parasite is zoonotic, originating from long-tailed macaque monkeys, with a 24-hour daily fever cycle?", options: ["Plasmodium ovale", "Plasmodium knowlesi", "Plasmodium vivax", "Plasmodium falciparum"], ans: 1, explanation: "P. knowlesi is a simian parasite in Southeast Asia that completes its blood cycle in 24 hours (quotidian fever)." },
+            { q: "Double chromatin dots and applique/accolé ring forms on the periphery of normal-sized RBCs strongly suggest:", options: ["Plasmodium falciparum", "Plasmodium vivax", "Plasmodium malariae", "Plasmodium ovale"], ans: 0, explanation: "Delicate ring forms with double chromatin dots and marginal accolé position are characteristic of P. falciparum." },
+            { q: "James' dots (stippling) occur in enlarged, oval-shaped erythrocytes with fimbriated (ragged) edges infected by:", options: ["Plasmodium falciparum", "Plasmodium vivax", "Plasmodium malariae", "Plasmodium ovale"], ans: 3, explanation: "James' dots (Orange Juice = OJ mnemonic) occur in oval, fimbriated RBCs infected by P. ovale." },
+            { q: "Recrudescence in P. falciparum or P. malariae infection refers to:", options: ["Reactivation of liver hypnozoites", "Persistence of blood-stage parasites at low undetectable levels due to inadequate therapy or resistance", "Infection by a new mosquito bite", "Transformation of gametocytes to schizonts"], ans: 1, explanation: "Recrudescence is the survival and eventual resurgence of blood-stage parasites without a liver hypnozoite phase." },
+            { q: "Where does the sexual cycle (Sporogony) of the malarial parasite take place?", options: ["Human hepatocytes", "Human erythrocytes", "Mosquito midgut and salivary glands", "Human spleen"], ans: 2, explanation: "Sporogony (sexual reproduction) occurs inside the female Anopheles mosquito (the definitive host)." },
+            { q: "What is the infective stage of Plasmodium injected by mosquitoes into humans?", options: ["Merozoite", "Sporozoite", "Trophozoite", "Gametocyte"], ans: 1, explanation: "Sporozoites stored in mosquito salivary glands are injected into the human bloodstream during feeding." },
+            { q: "What is the infective stage of Plasmodium ingested by mosquitoes from human blood?", options: ["Sporozoite", "Merozoite", "Gametocytes (micro- and macrogametocytes)", "Schizont"], ans: 2, explanation: "Mosquitoes ingest sexual stage Gametocytes, which then undergo exflagellation and fertilization in the mosquito gut." },
+            { q: "Which genetic hemoglobin variant provides significant innate protection against severe Plasmodium falciparum malaria?", options: ["Hemoglobin A1c", "Sickle cell trait (HbAS)", "Hemoglobin F elevation only", "Methemoglobin"], ans: 1, explanation: "Sickle cell trait (HbAS) impairs parasite growth and cytoadherence, protecting against fatal falciparum malaria." },
+            { q: "The Exflagellation process in the mosquito gut refers to the rapid maturation and microgametes formation from:", options: ["Macrogametocytes", "Microgametocytes", "Sporozoites", "Merozoites"], ans: 1, explanation: "Male microgametocytes undergo exflagellation, extruding motile whip-like microgametes to fertilize macrogametes." },
+            { q: "After fertilization in the mosquito stomach, the zygote transforms into a motile, elongated form called a:", options: ["Oocyst", "Ookinete", "Hypnozoite", "Schizont"], ans: 1, explanation: "The motile Ookinete penetrates the mosquito midgut wall to develop into an oocyst." },
+            { q: "Why are Plasmodium falciparum mature schizonts rarely seen in routine peripheral blood smears?", options: ["They develop only inside hepatocytes", "They are destroyed immediately by neutrophils", "They adhere to deep capillary endothelial walls (sequestration)", "They transform into spores"], ans: 2, explanation: "Sequestration via cytoadherence retains mature trophozoites and schizonts in internal organ microvasculature." },
+            { q: "Which antimalarial drug specifically targets and eradicates liver hypnozoites of P. vivax and P. ovale to prevent relapse?", options: ["Chloroquine", "Primaquine / Tafenoquine", "Quinine", "Artemether"], ans: 1, explanation: "8-aminoquinolines (Primaquine/Tafenoquine) eliminate hypnozoites in hepatocytes (radical cure)." },
+            { q: "Glucose-6-Phosphate Dehydrogenase (G6PD) screening is MANDATORY before administering which antimalarial drug?", options: ["Artesunate", "Primaquine", "Doxycycline", "Mefloquine"], ans: 1, explanation: "Primaquine induces severe acute intravascular hemolysis in G6PD-deficient individuals." },
+            { q: "In the thick blood smear procedure, water is added to the unstained smear to:", options: ["Fix red blood cells intact", "Lyse red blood cells (dehemoglobinization) to concentrate parasites", "Stain the nucleus blue", "Kill white blood cells"], ans: 1, explanation: "Thick smears are un-fixed; water lyses erythrocytes, leaving concentrated parasites and leukocytes for high screening sensitivity." },
+            { q: "Malarial Paroxysms (chills, fever, sweats) coincide directly with which stage of the parasite life cycle?", options: ["Entry of sporozoites into hepatocytes", "Rupture of erythrocytic schizonts releasing merozoites and toxic pyrogens into blood", "Exflagellation in mosquito midgut", "Formation of hypnozoites"], ans: 1, explanation: "Simultaneous rupture of RBC schizonts releases merozoites, hemozoin, and cytokines (TNF-α) causing fever spikes." },
+            { q: "Preferred target erythrocyte age for Plasmodium vivax is:", options: ["Reticulocytes / Young RBCs", "Old, senescent RBCs", "RBCs of any age equally", "Acanthocytes only"], ans: 0, explanation: "P. vivax selectively invades young reticulocytes (hence infected RBCs appear enlarged)." },
+            { q: "Preferred target erythrocyte age for Plasmodium malariae is:", options: ["Young reticulocytes", "Old, mature RBCs", "RBCs of any age", "Fetal RBCs only"], ans: 1, explanation: "P. malariae prefers aging, mature erythrocytes (hence infected RBCs remain normal or small in size)." },
+            { q: "Which rapid diagnostic test (RDT) antigen is specific ONLY for Plasmodium falciparum?", options: ["Plasmodium lactate dehydrogenase (pLDH)", "Histidine-Rich Protein 2 (PfHRP-2)", "Pan-malarial antigen (PMA)", "Aldolase"], ans: 1, explanation: "PfHRP-2 is expressed exclusively by P. falciparum, whereas pLDH and aldolase can detect pan-malarial species." },
+            { q: "Cerebral Malaria, characterized by encephalopathy and coma, is a signature severe complication of:", options: ["Plasmodium vivax", "Plasmodium falciparum", "Plasmodium malariae", "Plasmodium ovale"], ans: 1, explanation: "Sequestration of parasitized RBCs in cerebral capillaries leads to tissue hypoxia, coma, and high mortality in P. falciparum." },
+            { q: "The Quantitative Buffy Coat (QBC) method detects malarial parasites using capillary tubes coated with:", options: ["Giemsa stain", "Acridine Orange fluorescent dye", "Wright's stain", "Methylene blue"], ans: 1, explanation: "QBC uses acridine orange which fluoresces under UV light when bound to parasite DNA/RNA." },
+            { q: "What is the average number of merozoites produced per mature schizont in Plasmodium vivax?", options: ["6 to 12", "12 to 24", "8 to 24", "40 to 50"], ans: 1, explanation: "P. vivax mature schizonts contain an average of 12-24 merozoites filling an enlarged RBC." },
+            { q: "Hypnozoites are completely ABSENT in the life cycle of which two human malaria species?", options: ["P. vivax & P. ovale", "P. falciparum & P. malariae", "P. vivax & P. knowlesi", "P. ovale & P. malariae"], ans: 1, explanation: "P. falciparum and P. malariae do not form hypnozoites; they undergo direct erythrocytic development without liver dormancy." },
+            { q: "Sinton and Mulligan's stippling can occasionally be observed in RBCs infected with:", options: ["Plasmodium knowlesi", "Plasmodium vivax", "Plasmodium falciparum", "Plasmodium ovale"], ans: 0, explanation: "Sinton and Mulligan's dots are fine stipplings associated with Plasmodium knowlesi." },
+            { q: "Hypoglycemia in severe falciparum malaria can be exacerbated by administration of which antimalarial drug?", options: ["Artemether", "Quinine (stimulates pancreatic beta-cell insulin secretion)", "Doxycycline", "Primaquine"], ans: 1, explanation: "Quinine stimulates hyperinsulinemia from pancreatic beta cells, causing or worsening severe hypoglycemia." },
+            { q: "A patient acquiring malaria via contaminated blood transfusion will NOT develop:", options: ["Erythrocytic schizogony", "Fever paroxysms", "Liver exo-erythrocytic stage / Hypnozoites", "Anemia"], ans: 2, explanation: "Transfusion-transmitted malaria introduces blood-stage parasites directly; exo-erythrocytic liver stages never occur." },
+            { q: "Which stage of classical malarial paroxysm is characterized by intense shivering, teeth chattering, and vasoconstriction?", options: ["Hot stage", "Cold stage (Rigor)", "Sweating stage", "Defervescence stage"], ans: 1, explanation: "The cold stage (rigor) lasts 10-15 minutes with intense shivering despite rising core body temperature." },
+            { q: "In the sweating stage of a malarial paroxysm, what clinical change occurs?", options: ["Profuse diaphoresis and temperature defervescence", "Intense peripheral vasoconstriction", "Delirium and hot dry skin", "Convulsions"], ans: 0, explanation: "The sweating stage involves vasodilation, profuse sweating, and rapid drop in core body temperature back to normal." },
+            { q: "Which Plasmodium species exhibits an ameboid appearance of its trophozoite stage inside enlarged RBCs?", options: ["Plasmodium malariae", "Plasmodium vivax", "Plasmodium falciparum", "Plasmodium knowlesi"], ans: 1, explanation: "P. vivax trophozoites display active ameboid cytoplasm with pseudopodia inside enlarged RBCs." },
+            { q: "How many merozoites are typically contained in a mature schizont of Plasmodium ovale?", options: ["4 to 16 (average 8)", "12 to 24", "24 to 32", "6 to 12"], ans: 0, explanation: "P. ovale schizonts contain 4-16 merozoites (typically 8) surrounding a central dark pigment." },
+            { q: "Which organ is the initial site of parasite replication following sporozoite inoculation?", options: ["Spleen", "Liver (Hepatocytes)", "Bone marrow", "Kidney"], ans: 1, explanation: "Sporozoites clear rapidly from blood and invade hepatocytes to undergo exo-erythrocytic schizogony." },
+            { q: "What is the duration of the erythrocytic cycle in Plasmodium falciparum and Plasmodium vivax?", options: ["24 hours", "48 hours (Tertian)", "72 hours (Quartan)", "96 hours"], ans: 1, explanation: "Both P. falciparum and P. vivax complete their erythrocytic schizogony in ~48 hours (Tertian fever)." },
+            { q: "Which host receptor factor on RBCs is targeted by P. falciparum for erythrocyte invasion?", options: ["Glycophorins (e.g., Glycophorin A)", "Duffy antigen", "D-dimer", "CD4 receptor"], ans: 0, explanation: "P. falciparum uses sialic acid residues on erythrocyte Glycophorins to invade RBCs." },
+            { q: "Splenomegaly in chronic malaria is primarily caused by:", options: ["Parasite multiplication inside red pulp macrophages & immune congestion", "Direct bacterial invasion", "Splenic artery thrombosis", "B-cell lymphoma"], ans: 0, explanation: "Massive clearance of parasitized/damaged RBCs and reticuloendothelial cell hyperplasia causes reactive splenomegaly." },
+            { q: "Which diagnostic method provides definitive molecular confirmation when microscopy is inconclusive?", options: ["Polymerase Chain Reaction (PCR)", "Thick blood smear", "Montenegro skin test", "Erythrocyte sedimentation rate"], ans: 0, explanation: "PCR amplifies parasite DNA with highest sensitivity and specificity, ideal for low parasitemia or mixed species." },
+            { q: "Severe malarial anemia is driven by:", options: ["Intravascular rupture of infected RBCs", "Extravascular splenic phagocytosis of uninfected and infected RBCs", "Cytokine-mediated dyserythropoiesis (hepcidin elevation)", "All of the above"], ans: 3, explanation: "Malarial anemia is multifactorial: hemolysis, splenic destruction of altered RBCs, and bone marrow suppression." },
+            { q: "First-line Artemisinin-based Combination Therapy (ACT) recommended worldwide for uncomplicated P. falciparum is:", options: ["Artemether-Lumefantrine", "Chloroquine alone", "Metronidazole", "Sulfadoxine-Pyrimethamine alone"], ans: 0, explanation: "Artemether-Lumefantrine is the standard ACT regimen recommended for uncomplicated P. falciparum malaria." },
+            { q: "In the Philippines, peak malaria transmission occurs during:", options: ["Mid-dry season", "Beginning and end of the rainy season", "Constant uniform rate year-round", "Winter months only"], ans: 1, explanation: "Vector breeding peaks in streams during transition periods at the start and end of rainy seasons." }
+        ];
+
+        // MODULE 12 TRUE/FALSE (50 Items)
+        const mod12_tf = [
+            { q: "Plasmodium falciparum schizonts are commonly abundant in peripheral blood smears of mild cases.", ans: false, explanation: "FALSE. P. falciparum schizonts sequester in internal microvasculature and are rarely seen in routine PBS." },
+            { q: "Man acts as the Intermediate Host while female Anopheles mosquitoes serve as the Definitive Host.", ans: true, explanation: "TRUE. Sexual reproduction (sporogony) takes place in the mosquito (definitive host)." },
+            { q: "P. vivax and P. ovale can cause true malarial relapses years after primary infection.", ans: true, explanation: "TRUE. Relapses occur due to reactivation of dormant liver hypnozoites." },
+            { q: "Maurer's dots are characteristic stipplings seen in P. vivax infected erythrocytes.", ans: false, explanation: "FALSE. Maurer's dots occur in P. falciparum; P. vivax exhibits Schüffner's dots." },
+            { q: "Female Anopheles minimus var. flavirostris breeds in clear, slow-flowing, shaded streams.", ans: true, explanation: "TRUE. This is the principal malaria vector species in the Philippines." },
+            { q: "Plasmodium malariae infects reticulocytes exclusively, leading to high parasitemia.", ans: false, explanation: "FALSE. P. malariae prefers aging/old RBCs (<1% of total RBCs), resulting in low parasitemia." },
+            { q: "Banana-shaped gametocytes are diagnostic for Plasmodium falciparum.", ans: true, explanation: "TRUE. Crescent/banana gametocytes are pathognomonic for P. falciparum." },
+            { q: "Duffy blood group negative individuals are naturally resistant to Plasmodium vivax.", ans: true, explanation: "TRUE. Absence of Duffy antigens prevents P. vivax merozoite invasion." },
+            { q: "Quartan malaria (P. malariae) features fever spikes occurring every 24 hours.", ans: false, explanation: "FALSE. Quartan malaria has a 72-hour cycle, causing fever spikes every 72 hours (4th day)." },
+            { q: "Thick blood smear is fixed with methanol prior to Giemsa staining.", ans: false, explanation: "FALSE. Thin smears are fixed with methanol; thick smears are UNFIXED to allow RBC lysis." },
+            { q: "P. knowlesi is a zoonotic malaria parasite transmitted from macaque monkeys in Southeast Asia.", ans: true, explanation: "TRUE. P. knowlesi naturally infects macaque monkeys and causes human quotidian malaria." },
+            { q: "Plasmodium ovale causes infected erythrocytes to become oval with ragged or fimbriated margins.", ans: true, explanation: "TRUE. Fimbriated, oval-shaped RBCs with James' dots are classic for P. ovale." },
+            { q: "PfEMP-1 knob proteins cause parasitized RBCs to adhere to vascular endothelium (cytoadherence).", ans: true, explanation: "TRUE. PfEMP-1 binds ICAM-1 and CD36 on endothelial cells causing sequestration." },
+            { q: "Relapse and Recrudescence refer to the exact same pathophysiological process.", ans: false, explanation: "FALSE. Relapse stems from liver hypnozoites; recrudescence stems from persistent blood-stage parasites." },
+            { q: "Sporozoites are injected into human blood through mosquito salivary secretions.", ans: true, explanation: "TRUE. Inoculation of sporozoites from salivary glands initiates human infection." },
+            { q: "Primaquine is administered to eradicate liver hypnozoites in P. vivax and P. ovale.", ans: true, explanation: "TRUE. Primaquine provides radical cure by killing dormant hypnozoites in hepatocytes." },
+            { q: "Rosette schizonts with 6-12 merozoites are characteristic of Plasmodium falciparum.", ans: false, explanation: "FALSE. Rosette schizonts are characteristic of Plasmodium malariae." },
+            { q: "Blackwater fever involves severe intravascular hemolysis and dark hemoglobinuria.", ans: true, explanation: "TRUE. Massive RBC breakdown produces dark hemoglobin-rich urine." },
+            { q: "G6PD deficiency provides partial protection against Plasmodium falciparum malaria.", ans: true, explanation: "TRUE. G6PD deficiency increases oxidative stress in RBCs, limiting parasite growth." },
+            { q: "Thin blood smear is used primarily as a sensitive screening test for low parasitemia.", ans: false, explanation: "FALSE. THICK smear is used for screening; THIN smear is used for species identification." },
+            { q: "P. knowlesi completes its blood schizogony cycle in 24 hours.", ans: true, explanation: "TRUE. P. knowlesi has a rapid 24-hour cycle causing daily fever paroxysms." },
+            { q: "Hypnozoites are formed during the life cycle of Plasmodium falciparum.", ans: false, explanation: "FALSE. P. falciparum does NOT form hypnozoites." },
+            { q: "Ookinete is the motile zygote form that penetrates the mosquito midgut wall.", ans: true, explanation: "TRUE. Fertilized zygote transforms into a motile ookinete to penetrate the stomach wall." },
+            { q: "Accolé or applique ring forms are commonly found on the rim of RBCs in P. falciparum.", ans: true, explanation: "TRUE. Ring forms adhering to the outer erythrocyte margin are typical of P. falciparum." },
+            { q: "Male Anopheles mosquitoes transmit malaria by biting humans at night.", ans: false, explanation: "FALSE. Male mosquitoes feed on plant nectar only; only FEMALE Anopheles feed on blood." },
+            { q: "P. vivax trophozoites exhibit prominent ameboid cytoplasm with pseudopodia.", ans: true, explanation: "TRUE. Ameboid trophozoites inside enlarged RBCs are diagnostic for P. vivax." },
+            { q: "Sickle cell trait (HbAS) increases susceptibility to severe malaria.", ans: false, explanation: "FALSE. HbAS provides strong protection AGAINST severe falciparum malaria." },
+            { q: "Quantitative Buffy Coat (QBC) utilizes Acridine Orange dye to stain parasite nucleic acid.", ans: true, explanation: "TRUE. Fluorescent acridine orange binds parasite DNA/RNA inside specialized capillary tubes." },
+            { q: "Malarial paroxysm cold stage involves intense peripheral vasodilation.", ans: false, explanation: "FALSE. Cold stage involves intense peripheral VASOCONSTRICTION, making the patient feel freezing." },
+            { q: "Band-form trophozoites are a hallmark diagnostic feature of Plasmodium malariae.", ans: true, explanation: "TRUE. Band trophozoites stretching across normal RBCs are classic for P. malariae." },
+            { q: "PfHRP-2 antigen can be detected using rapid diagnostic immunochromatographic test strips.", ans: true, explanation: "TRUE. PfHRP-2 is a widely targeted antigen in falciparum malaria RDT kits." },
+            { q: "Plasmodium falciparum causes infected erythrocytes to double in size.", ans: false, explanation: "FALSE. P. falciparum infected RBCs remain normal in size." },
+            { q: "Exo-erythrocytic schizogony occurs inside human red blood cells.", ans: false, explanation: "FALSE. EXO-erythrocytic schizogony occurs inside LIVER hepatocytes (exo = outside RBC)." },
+            { q: "Cerebral malaria carries a mortality rate of 15-20% despite treatment.", ans: true, explanation: "TRUE. Encephalopathy and coma from capillary sequestration remain highly lethal." },
+            { q: "Congenital malaria occurs when infected maternal RBCs mix with fetal blood during delivery.", ans: true, explanation: "TRUE. Transplacental or intrapartum passage of parasitized maternal blood causes congenital infection." },
+            { q: "James' dots are associated with Plasmodium malariae.", ans: false, explanation: "FALSE. James' dots are associated with P. ovale (Orange Juice = OJ)." },
+            { q: "Exflagellation occurs when male microgametocytes produce whip-like microgametes in mosquito gut.", ans: true, explanation: "TRUE. Lower temperature and pH changes trigger exflagellation of microgametocytes." },
+            { q: "P. malariae can persist in the human bloodstream at low levels for up to 40 years.", ans: true, explanation: "TRUE. P. malariae is infamous for long-term asymptomatic blood infection causing late recrudescence." },
+            { q: "Artemisinin-based combination therapies (ACT) are first-line treatment for uncomplicated falciparum malaria.", ans: true, explanation: "TRUE. ACTs (e.g., Artemether-Lumefantrine) are global standard first-line regimens." },
+            { q: "Multiple ring forms infecting a single erythrocyte are frequently seen in P. falciparum.", ans: true, explanation: "TRUE. High parasitemia in P. falciparum leads to multiple rings per RBC." },
+            { q: "Sporogony is the asexual cycle occurring in human hepatocytes.", ans: false, explanation: "FALSE. Sporogony is the SEXUAL cycle occurring inside mosquitoes." },
+            { q: "Ziemann's dots are fine stipplings seen in P. malariae infected cells.", ans: true, explanation: "TRUE. Ziemann's dots (Manila Zoo = MZ) occur in P. malariae." },
+            { q: "Anopheles mosquitoes bite predominantly during mid-day sunlight.", ans: false, explanation: "FALSE. Anopheles mosquitoes are nocturnal feeders, biting mostly between twilight and dawn." },
+            { q: "Hepcidin elevation during malaria inflammation impairs iron availability for erythropoiesis.", ans: true, explanation: "TRUE. Cytokine-driven hepcidin locks iron in macrophages, contributing to dyserythropoietic anemia." },
+            { q: "P. knowlesi diagnosis by light microscopy alone is simple because its stages are unique.", ans: false, explanation: "FALSE. P. knowlesi microscopy is challenging because rings resemble P. falciparum and bands resemble P. malariae." },
+            { q: "Merozoites released from ruptured liver schizonts invade blood platelets.", ans: false, explanation: "FALSE. Merozoites specifically invade red blood cells (erythrocytes)." },
+            { q: "Quinine administration can trigger severe hypoglycemia by inducing hyperinsulinemia.", ans: true, explanation: "TRUE. Quinine stimulates pancreatic beta-cell insulin secretion." },
+            { q: "Plasmodium ovale is the most common malaria species in the Philippines.", ans: false, explanation: "FALSE. P. falciparum and P. vivax are most common; P. ovale is rare in the Philippines (common in Africa)." },
+            { q: "Hypnozoites develop from sporozoites that remain dormant inside hepatocytes.", ans: true, explanation: "TRUE. Hypnozoites are latent liver stages responsible for delayed relapses." },
+            { q: "Rosetting occurs when parasitized RBCs bind to uninfected RBCs, forming clumps.", ans: true, explanation: "TRUE. Rosetting contributes to microvascular sludging and tissue ischemia." }
+        ];
+
+        // LIFE CYCLE DATA
+        const lifeCycleData = {
+            leishmania: {
+                title: "Leishmania spp. Life Cycle",
+                desc: "Sandfly Vector (Phlebotomus/Lutzomyia) <---> Human Reticuloendothelial System",
+                infective: "Promastigote (Sandfly proboscis)",
+                diagnostic: "Amastigote (Tissue Macrophages / LD Bodies)",
+                steps: [
+                    { title: "1. Vector Inoculation", text: "Female Sandfly takes a blood meal and injects infective Promastigotes into human skin from proboscis." },
+                    { title: "2. Macrophage Phagocytosis", text: "Promastigotes are phagocytosed by mononuclear phagocytes (macrophages) in the skin." },
+                    { title: "3. Amastigote Transformation", text: "Inside macrophage phagolysosomes, promastigotes transform into non-motile Amastigotes." },
+                    { title: "4. Intracellular Multiplication", text: "Amastigotes multiply by binary fission, rupturing host cells to infect surrounding RES tissue." },
+                    { title: "5. Vector Uptake & Midgut Cycle", text: "Sandfly ingests infected macrophages during blood meal. Amastigotes transform back to Promastigotes in sandfly gut." }
+                ],
+                svg: `<svg viewBox="0 0 400 200" class="w-full max-w-md">
+                    <circle cx="80" cy="100" r="40" fill="#3B82F6" opacity="0.2"/>
+                    <circle cx="80" cy="100" r="30" stroke="#3B82F6" stroke-width="2" fill="none"/>
+                    <text x="80" y="95" fill="#93C5FD" font-size="10" text-anchor="middle" font-weight="bold">SANDFLY GUT</text>
+                    <text x="80" y="112" fill="#38BDF8" font-size="9" text-anchor="middle">Promastigotes</text>
+
+                    <path d="M 120 100 L 280 100" stroke="#F5B014" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+
+                    <circle cx="320" cy="100" r="40" fill="#EF4444" opacity="0.2"/>
+                    <circle cx="320" cy="100" r="30" stroke="#EF4444" stroke-width="2" fill="none"/>
+                    <text x="320" y="95" fill="#FCA5A5" font-size="10" text-anchor="middle" font-weight="bold">HUMAN RES</text>
+                    <text x="320" y="112" fill="#F87171" font-size="9" text-anchor="middle">Amastigotes</text>
+                </svg>`
+            },
+            tcruzi: {
+                title: "Trypanosoma cruzi Life Cycle",
+                desc: "Triatomine Bug Vector <---> Human Blood & Tissue",
+                infective: "Metacyclic Trypomastigote (Bug Feces)",
+                diagnostic: "Trypomastigote (Blood) & Amastigote (Tissue Pseudocysts)",
+                steps: [
+                    { title: "1. Fecal Contamination", text: "Triatomine bug defecates while taking a blood meal. Metacyclic trypomastigotes in feces enter bite wound or mucosa." },
+                    { title: "2. Cell Invasion & Transformation", text: "Metacyclic trypomastigotes invade cells near entry site and transform into intracellular Amastigotes." },
+                    { title: "3. Binary Fission & Differentiation", text: "Amastigotes multiply inside cardiac/smooth muscle, transform into Trypomastigotes, and burst into bloodstream." },
+                    { title: "4. Vector Infection", text: "Triatomine bug ingests blood trypomastigotes, which transform to Epimastigotes in bug midgut." }
+                ],
+                svg: `<svg viewBox="0 0 400 200" class="w-full max-w-md">
+                    <rect x="40" y="60" width="100" height="80" rx="10" fill="#DC2626" opacity="0.2" stroke="#DC2626" stroke-width="2"/>
+                    <text x="90" y="95" fill="#FCA5A5" font-size="10" text-anchor="middle" font-weight="bold">TRIATOMINE</text>
+                    <text x="90" y="112" fill="#EF4444" font-size="9" text-anchor="middle">Hindgut Feces</text>
+
+                    <path d="M 150 100 C 200 50, 200 150, 250 100" stroke="#F5B014" stroke-width="3" fill="none"/>
+
+                    <rect x="260" y="60" width="100" height="80" rx="10" fill="#2563EB" opacity="0.2" stroke="#2563EB" stroke-width="2"/>
+                    <text x="310" y="95" fill="#93C5FD" font-size="10" text-anchor="middle" font-weight="bold">HUMAN HOST</text>
+                    <text x="310" y="112" fill="#60A5FA" font-size="9" text-anchor="middle">Blood & Heart</text>
+                </svg>`
+            },
+            tbrucei: {
+                title: "Trypanosoma brucei Complex Life Cycle",
+                desc: "Tsetse Fly Vector (Glossina) <---> Human Lymphatics & Bloodstream",
+                infective: "Metacyclic Trypomastigote (Tsetse Salivary Glands)",
+                diagnostic: "Trypomastigote (Bloodstream / CSF)",
+                steps: [
+                    { title: "1. Tsetse Fly Bite", text: "Infected Tsetse fly injects metacyclic trypomastigotes into skin bite tissue via saliva." },
+                    { title: "2. Blood & Lymph Replication", text: "Parasites transform into bloodstream trypomastigotes and replicate by binary fission in blood and lymphatics." },
+                    { title: "3. CNS Invasion", text: "In late stages, trypomastigotes cross blood-brain barrier into CSF, causing meningoencephalitis." },
+                    { title: "4. Fly Salivary Cycle", text: "Tsetse fly ingests blood trypomastigotes -> Procyclic stage in midgut -> Epimastigotes in salivary glands." }
+                ],
+                svg: `<svg viewBox="0 0 400 200" class="w-full max-w-md">
+                    <circle cx="100" cy="100" r="45" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                    <text x="100" y="95" fill="#6EE7B7" font-size="10" text-anchor="middle" font-weight="bold">TSETSE SALIVA</text>
+                    <text x="100" y="112" fill="#34D399" font-size="9" text-anchor="middle">Metacyclic Stage</text>
+
+                    <path d="M 155 100 L 245 100" stroke="#F5B014" stroke-width="3"/>
+
+                    <circle cx="300" cy="100" r="45" fill="#7C3AED" opacity="0.2" stroke="#7C3AED" stroke-width="2"/>
+                    <text x="300" y="95" fill="#DDD6FE" font-size="10" text-anchor="middle" font-weight="bold">BLOOD & CSF</text>
+                    <text x="300" y="112" fill="#C084FC" font-size="9" text-anchor="middle">Trypomastigotes</text>
+                </svg>`
+            },
+            plasmodium: {
+                title: "Plasmodium spp. (Malaria) Life Cycle",
+                desc: "Female Anopheles Mosquito <---> Human Liver & Erythrocytes",
+                infective: "Sporozoite (Mosquito saliva to Human)",
+                diagnostic: "Rings, Trophozoites, Schizonts, Gametocytes in Blood",
+                steps: [
+                    { title: "1. Inoculation & Exo-Erythrocytic Cycle", text: "Mosquito injects Sporozoites into blood -> invade hepatocytes -> multiply into Hepatic Schizonts." },
+                    { title: "2. Merozoite Release", text: "Hepatic schizonts rupture, releasing thousands of Merozoites into bloodstream. (Hypnozoites persist in P.v / P.o)." },
+                    { title: "3. Erythrocytic Cycle (RBC)", text: "Merozoites invade RBCs -> Ring Trophozoites -> Erythrocytic Schizonts -> Rupture causing clinical Paroxysms." },
+                    { title: "4. Sporogonic Cycle (Mosquito)", text: "Mosquito ingests Gametocytes -> Exflagellation & Fertilization in mosquito gut -> Ookinete -> Oocyst -> Sporozoites." }
+                ],
+                svg: `<svg viewBox="0 0 400 200" class="w-full max-w-md">
+                    <rect x="20" y="50" width="100" height="100" rx="8" fill="#D97706" opacity="0.2" stroke="#D97706" stroke-width="2"/>
+                    <text x="70" y="95" fill="#FDE68A" font-size="9" text-anchor="middle" font-weight="bold">1. LIVER STAGE</text>
+                    <text x="70" y="110" fill="#FBBF24" font-size="8" text-anchor="middle">Sporozoites</text>
+
+                    <path d="M 125 100 L 165 100" stroke="#F5B014" stroke-width="2"/>
+
+                    <rect x="170" y="50" width="100" height="100" rx="8" fill="#DC2626" opacity="0.2" stroke="#DC2626" stroke-width="2"/>
+                    <text x="220" y="95" fill="#FCA5A5" font-size="9" text-anchor="middle" font-weight="bold">2. RBC STAGE</text>
+                    <text x="220" y="110" fill="#F87171" font-size="8" text-anchor="middle">Rings / Schizonts</text>
+
+                    <path d="M 275 100 L 315 100" stroke="#F5B014" stroke-width="2"/>
+
+                    <rect x="320" y="50" width="70" height="100" rx="8" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                    <text x="355" y="95" fill="#6EE7B7" font-size="8" text-anchor="middle" font-weight="bold">MOSQUITO</text>
+                    <text x="355" y="110" fill="#34D399" font-size="8" text-anchor="middle">Sporogony</text>
+                </svg>`
+            }
+        };
+
+        // PRACTICAL SLIDES DATA
+        const practicalSlides = [
+            {
+                id: "amastigote",
+                name: "Amastigote Stage (LD Body)",
+                organism: "Leishmania spp. / T. cruzi",
+                desc: "Small (3-5 µm) ovoid intracellular form within tissue macrophage. Note large nucleus and rod-like kinetoplast.",
+                svg: `<svg viewBox="0 0 200 200" class="w-48 h-48">
+                    <circle cx="100" cy="100" r="85" fill="#FEE2E2" stroke="#991B1B" stroke-width="4"/>
+                    <!-- Macrophage Nucleus -->
+                    <path d="M 60 70 Q 100 40 130 80 Q 100 120 60 70" fill="#7C3AED" opacity="0.7"/>
+                    <!-- Amastigotes inside -->
+                    <circle cx="70" cy="130" r="8" fill="#991B1B"/><circle cx="72" cy="130" r="2" fill="#000"/>
+                    <circle cx="95" cy="140" r="8" fill="#991B1B"/><circle cx="97" cy="140" r="2" fill="#000"/>
+                    <circle cx="120" cy="125" r="8" fill="#991B1B"/><circle cx="122" cy="125" r="2" fill="#000"/>
+                    <circle cx="135" cy="100" r="8" fill="#991B1B"/><circle cx="137" cy="100" r="2" fill="#000"/>
+                </svg>`
+            },
+            {
+                id: "promastigote",
+                name: "Promastigote Stage",
+                organism: "Leishmania spp.",
+                desc: "Elongated motile extracellular form with single anterior free flagellum. Found in sandfly vector & NNN culture.",
+                svg: `<svg viewBox="0 0 200 200" class="w-48 h-48">
+                    <circle cx="100" cy="100" r="85" fill="#F0F9FF" stroke="#0369A1" stroke-width="4"/>
+                    <!-- Promastigote body -->
+                    <path d="M 70 120 Q 100 80 120 50 Q 110 90 70 120" fill="#0284C7"/>
+                    <circle cx="100" cy="80" r="4" fill="#000"/>
+                    <!-- Flagellum -->
+                    <path d="M 120 50 Q 130 30 150 25" stroke="#0284C7" stroke-width="3" fill="none"/>
+                </svg>`
+            },
+            {
+                id: "trypomastigote_tcruzi",
+                name: "C/U-Shaped Trypomastigote",
+                organism: "Trypanosoma cruzi",
+                desc: "Extracellular blood stage with characteristic C or U shape, large prominent posterior kinetoplast, and free flagellum.",
+                svg: `<svg viewBox="0 0 200 200" class="w-48 h-48">
+                    <circle cx="100" cy="100" r="85" fill="#FEF2F2" stroke="#DC2626" stroke-width="4"/>
+                    <!-- C-shaped body -->
+                    <path d="M 140 60 C 60 40 50 150 130 140" stroke="#B91C1C" stroke-width="14" stroke-linecap="round" fill="none"/>
+                    <!-- Kinetoplast -->
+                    <circle cx="135" cy="138" r="5" fill="#000"/>
+                    <!-- Nucleus -->
+                    <circle cx="85" cy="95" r="7" fill="#7C3AED"/>
+                </svg>`
+            },
+            {
+                id: "pf_ring",
+                name: "Accolé / Ring Form Trophozoite",
+                organism: "Plasmodium falciparum",
+                desc: "Small delicate ring occupying 1/6 RBC size. Note applique/accolé form on RBC margin and double chromatin dots.",
+                svg: `<svg viewBox="0 0 200 200" class="w-48 h-48">
+                    <circle cx="100" cy="100" r="80" fill="#FECDD3" stroke="#E11D48" stroke-width="4"/>
+                    <!-- Ring Trophozoite -->
+                    <circle cx="70" cy="70" r="14" stroke="#2563EB" stroke-width="3" fill="none"/>
+                    <circle cx="64" cy="62" r="3" fill="#DC2626"/>
+                    <circle cx="74" cy="60" r="3" fill="#DC2626"/>
+                </svg>`
+            },
+            {
+                id: "pf_gametocyte",
+                name: "Banana / Crescent Gametocyte",
+                organism: "Plasmodium falciparum",
+                desc: "Pathognomonic crescent or banana-shaped sexual stage with central dark coarse hemozoin pigment.",
+                svg: `<svg viewBox="0 0 200 200" class="w-48 h-48">
+                    <circle cx="100" cy="100" r="85" fill="#F1F5F9" stroke="#475569" stroke-width="4"/>
+                    <!-- Crescent Gametocyte -->
+                    <path d="M 60 140 C 40 70 120 40 150 60 C 100 70 60 110 60 140 Z" fill="#7C3AED"/>
+                    <circle cx="95" cy="80" r="6" fill="#B45309"/>
+                </svg>`
+            },
+            {
+                id: "pm_rosette",
+                name: "Rosette / Daisy Head Schizont",
+                organism: "Plasmodium malariae",
+                desc: "Mature schizont containing 6-12 merozoites symmetrically arranged around a central dark pigment mass.",
+                svg: `<svg viewBox="0 0 200 200" class="w-48 h-48">
+                    <circle cx="100" cy="100" r="80" fill="#FECDD3" stroke="#E11D48" stroke-width="4"/>
+                    <!-- Central pigment -->
+                    <circle cx="100" cy="100" r="10" fill="#78350F"/>
+                    <!-- Rosette Merozoites -->
+                    <circle cx="100" cy="70" r="9" fill="#047857"/>
+                    <circle cx="125" cy="80" r="9" fill="#047857"/>
+                    <circle cx="130" cy="105" r="9" fill="#047857"/>
+                    <circle cx="115" cy="128" r="9" fill="#047857"/>
+                    <circle cx="85" cy="128" r="9" fill="#047857"/>
+                    <circle cx="70" cy="105" r="9" fill="#047857"/>
+                    <circle cx="75" cy="80" r="9" fill="#047857"/>
+                </svg>`
+            }
+        ];
+
+        // ==========================================
+        // APP STATE & CONTROLLERS
+        // ==========================================
+        let currentTab = 'notes';
+        let currentLC = 'leishmania';
+        let currentLCStep = 0;
+
+        // Quiz State
+        let quizQuestions = [];
+        let quizIndex = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+
+        // Practical State
+        let pracMode = 'study';
+        let pracIndex = 0;
+        let pracScore = 0;
+
+        // INITIALIZATION ON DOM LOAD
+        window.onload = function() {
+            initQuiz();
+            renderLifeCycle();
+            renderFlashcards();
+            renderPracQuestion();
+        };
+
+        // NAVIGATION TAB SWITCHER
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('text-ust-gold');
+                btn.style.backgroundColor = 'transparent';
+            });
+            
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            const sections = ['notes', 'lifecycles', 'quiz', 'practical'];
+            sections.forEach(sec => {
+                const el = document.getElementById(`sec-${sec}`);
+                if (el) {
+                    if (sec === tabId) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        // TAB 1: NOTES FILTER
+        function filterNotes(mod) {
+            document.querySelectorAll('.note-filter-btn').forEach(b => {
+                b.classList.remove('bg-ust-navy', 'text-white');
+                b.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeFilter = document.getElementById(`filter-${mod}`);
+            if (activeFilter) {
+                activeFilter.classList.remove('bg-slate-100', 'text-slate-600');
+                activeFilter.classList.add('bg-ust-navy', 'text-white');
+            }
+
+            const m11 = document.getElementById('notes-mod11');
+            const m12 = document.getElementById('notes-mod12');
+
+            if (mod === 'all') {
+                if (m11) m11.classList.remove('hidden');
+                if (m12) m12.classList.remove('hidden');
+            } else if (mod === 'mod11') {
+                if (m11) m11.classList.remove('hidden');
+                if (m12) m12.classList.add('hidden');
+            } else {
+                if (m11) m11.classList.add('hidden');
+                if (m12) m12.classList.remove('hidden');
+            }
+        }
+
+        // TAB 2: LIFE CYCLE LOGIC
+        function showLifeCycle(key) {
+            currentLC = key;
+            currentLCStep = 0;
+            document.querySelectorAll('.lc-tab-btn').forEach(b => {
+                b.classList.remove('bg-ust-gold', 'text-ust-black');
+                b.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeLcBtn = document.getElementById(`lc-btn-${key}`);
+            if (activeLcBtn) {
+                activeLcBtn.classList.remove('bg-slate-100', 'text-slate-600');
+                activeLcBtn.classList.add('bg-ust-gold', 'text-ust-black');
+            }
+
+            renderLifeCycle();
+        }
+
+        function renderLifeCycle() {
+            const data = lifeCycleData[currentLC];
+            document.getElementById('lc-title').innerText = data.title;
+            document.getElementById('lc-desc').innerText = data.desc;
+            document.getElementById('lc-infective-stage').innerText = data.infective;
+            document.getElementById('lc-diagnostic-stage').innerText = data.diagnostic;
+
+            document.getElementById('lc-diagram-box').innerHTML = data.svg;
+
+            const step = data.steps[currentLCStep];
+            document.getElementById('lc-phase-badge').innerText = `Step ${currentLCStep + 1} of ${data.steps.length}`;
+            document.getElementById('lc-step-title').innerText = step.title;
+            document.getElementById('lc-step-text').innerText = step.text;
+        }
+
+        function nextLCStep() {
+            const max = lifeCycleData[currentLC].steps.length;
+            currentLCStep = (currentLCStep + 1) % max;
+            renderLifeCycle();
+        }
+
+        function prevLCStep() {
+            const max = lifeCycleData[currentLC].steps.length;
+            currentLCStep = (currentLCStep - 1 + max) % max;
+            renderLifeCycle();
+        }
+
+        // TAB 3: QUIZ LOGIC
+        function initQuiz() {
+            const mod = document.getElementById('quiz-mod-select').value;
+            const type = document.getElementById('quiz-type-select').value;
+
+            if (mod === 'mod11') {
+                quizQuestions = (type === 'mcq') ? mod11_mcq : mod11_tf;
+            } else {
+                quizQuestions = (type === 'mcq') ? mod12_mcq : mod12_tf;
+            }
+
+            quizIndex = 0;
+            quizScore = 0;
+            quizAnswered = false;
+
+            updateQuizUI();
+        }
+
+        function resetQuiz() {
+            initQuiz();
+        }
+
+        function updateQuizUI() {
+            if (quizIndex >= quizQuestions.length) {
+                document.getElementById('quiz-question-text').innerText = `🎉 Quiz Complete! Final Score: ${quizScore} / ${quizQuestions.length}`;
+                document.getElementById('quiz-options-container').innerHTML = `<button type="button" onclick="resetQuiz()" class="bg-ust-gold text-ust-black font-bold p-3 rounded-lg cursor-pointer">Retake Quiz</button>`;
+                document.getElementById('quiz-rationale-box').classList.add('hidden');
+                document.getElementById('quiz-next-btn').classList.add('hidden');
+                return;
+            }
+
+            const q = quizQuestions[quizIndex];
+            quizAnswered = false;
+
+            document.getElementById('quiz-q-num').innerText = `Question ${quizIndex + 1} of ${quizQuestions.length}`;
+            document.getElementById('quiz-progress-bar').style.width = `${((quizIndex + 1) / quizQuestions.length) * 100}%`;
+            document.getElementById('quiz-question-text').innerText = q.q;
+
+            document.getElementById('quiz-score-display').innerText = `${quizScore} / ${quizIndex}`;
+            const acc = quizIndex > 0 ? Math.round((quizScore / quizIndex) * 100) : 0;
+            document.getElementById('quiz-accuracy-display').innerText = `${acc}%`;
+
+            document.getElementById('quiz-rationale-box').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+
+            const container = document.getElementById('quiz-options-container');
+            container.innerHTML = '';
+
+            const isTF = Array.isArray(q.options) === false;
+
+            if (isTF) {
+                [true, false].forEach((val) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = "p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-left text-xs font-bold text-slate-800 transition cursor-pointer";
+                    btn.innerText = val ? "TRUE" : "FALSE";
+                    btn.onclick = () => checkQuizAnswer(val);
+                    container.appendChild(btn);
+                });
+            } else {
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = "p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-left text-xs font-semibold text-slate-700 transition flex items-center gap-2 cursor-pointer";
+                    btn.innerHTML = `<span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-[10px]">${String.fromCharCode(65 + idx)}</span> ${opt}`;
+                    btn.onclick = () => checkQuizAnswer(idx);
+                    container.appendChild(btn);
+                });
+            }
+        }
+
+        function checkQuizAnswer(userAns) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+
+            const q = quizQuestions[quizIndex];
+            const isCorrect = userAns === q.ans;
+
+            if (isCorrect) quizScore++;
+
+            const rationaleBox = document.getElementById('quiz-rationale-box');
+            const rationaleTitle = document.getElementById('quiz-rationale-title');
+            const rationaleText = document.getElementById('quiz-rationale-text');
+
+            rationaleBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-red-50', 'border-red-200');
+
+            if (isCorrect) {
+                rationaleBox.classList.add('bg-emerald-50', 'border-emerald-200');
+                rationaleTitle.className = 'font-bold text-xs uppercase tracking-wider text-emerald-800 flex items-center gap-2';
+                rationaleTitle.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> Correct Answer!`;
+            } else {
+                rationaleBox.classList.add('bg-red-50', 'border-red-200');
+                rationaleTitle.className = 'font-bold text-xs uppercase tracking-wider text-red-800 flex items-center gap-2';
+                rationaleTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600"></i> Incorrect Answer`;
+            }
+
+            rationaleText.innerText = q.explanation;
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            quizIndex++;
+            updateQuizUI();
+        }
+
+        // TAB 4: PRACTICAL EXAM LOGIC
+        function switchPracticalMode(mode) {
+            pracMode = mode;
+            document.querySelectorAll('.prac-mode-btn').forEach(b => {
+                b.classList.remove('bg-ust-navy', 'text-white');
+                b.classList.add('bg-slate-100', 'text-slate-600');
+            });
+
+            const studyBtn = document.getElementById('prac-mode-study');
+            const testBtn = document.getElementById('prac-mode-test');
+            const studyView = document.getElementById('prac-study-view');
+            const testView = document.getElementById('prac-test-view');
+
+            if (mode === 'study') {
+                if (studyBtn) studyBtn.classList.add('bg-ust-navy', 'text-white');
+                if (studyView) studyView.classList.remove('hidden');
+                if (testView) testView.classList.add('hidden');
+            } else {
+                if (testBtn) testBtn.classList.add('bg-ust-navy', 'text-white');
+                if (studyView) studyView.classList.add('hidden');
+                if (testView) testView.classList.remove('hidden');
+                pracIndex = 0;
+                pracScore = 0;
+                renderPracQuestion();
+            }
+        }
+
+        function renderFlashcards() {
+            const grid = document.getElementById('flashcards-grid');
+            grid.innerHTML = '';
+
+            practicalSlides.forEach(slide => {
+                const card = document.createElement('div');
+                card.className = 'slide-card h-80 cursor-pointer';
+                card.onclick = () => card.classList.toggle('flipped');
+
+                card.innerHTML = `
+                    <div class="slide-card-inner relative w-full h-full shadow-sm rounded-xl border border-slate-200 bg-white">
+                        <!-- Front -->
+                        <div class="slide-card-front absolute inset-0 p-5 flex flex-col items-center justify-between">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Microscope View</span>
+                            ${slide.svg}
+                            <span class="text-xs font-semibold text-ust-accent">Click to Reveal Answer <i class="fa-solid fa-rotate ms-1"></i></span>
+                        </div>
+                        <!-- Back -->
+                        <div class="slide-card-back absolute inset-0 p-5 bg-slate-900 text-white rounded-xl flex flex-col justify-center space-y-3">
+                            <span class="text-[10px] font-bold text-ust-gold uppercase tracking-wider">${slide.organism}</span>
+                            <h4 class="font-heading font-bold text-base text-white">${slide.name}</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">${slide.desc}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderPracQuestion() {
+            if (pracIndex >= practicalSlides.length) {
+                document.getElementById('prac-slide-canvas').innerHTML = `<p class="text-white font-bold">Exam Finished! Final Score: ${pracScore}/${practicalSlides.length}</p>`;
+                document.getElementById('prac-options-box').innerHTML = `<button type="button" onclick="switchPracticalMode('test')" class="bg-purple-600 text-white font-bold p-3 rounded-lg col-span-2 cursor-pointer">Restart Practical Exam</button>`;
+                document.getElementById('prac-feedback-box').classList.add('hidden');
+                document.getElementById('prac-next-btn').classList.add('hidden');
+                return;
+            }
+
+            const current = practicalSlides[pracIndex];
+            document.getElementById('prac-q-num').innerText = pracIndex + 1;
+            document.getElementById('prac-score').innerText = pracScore;
+            document.getElementById('prac-total').innerText = pracIndex;
+
+            document.getElementById('prac-slide-canvas').innerHTML = current.svg;
+            document.getElementById('prac-feedback-box').classList.add('hidden');
+            document.getElementById('prac-next-btn').classList.add('hidden');
+
+            const optionsBox = document.getElementById('prac-options-box');
+            optionsBox.innerHTML = '';
+
+            const choices = [current.name];
+            practicalSlides.forEach(s => {
+                if (s.name !== current.name && choices.length < 4) choices.push(s.name);
+            });
+            choices.sort(() => Math.random() - 0.5);
+
+            choices.forEach(c => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-slate-700 text-left transition cursor-pointer";
+                btn.innerText = c;
+                btn.onclick = () => checkPracAnswer(c, current);
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function checkPracAnswer(selected, current) {
+            const feedback = document.getElementById('prac-feedback-box');
+            feedback.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'bg-red-50', 'text-red-900');
+
+            if (selected === current.name) {
+                pracScore++;
+                feedback.classList.add('bg-emerald-50', 'text-emerald-900');
+                feedback.innerHTML = `<strong class="block"><i class="fa-solid fa-circle-check"></i> Correct!</strong> ${current.desc}`;
+            } else {
+                feedback.classList.add('bg-red-50', 'text-red-900');
+                feedback.innerHTML = `<strong class="block"><i class="fa-solid fa-circle-xmark"></i> Incorrect. Correct Answer: ${current.name}</strong> ${current.desc}`;
+            }
+
+            document.getElementById('prac-next-btn').classList.remove('hidden');
+        }
+
+        function nextPracQuestion() {
+            pracIndex++;
+            renderPracQuestion();
+        }
+    </script>
+</body>
+</html>
